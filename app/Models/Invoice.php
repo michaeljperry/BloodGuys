@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model 
 {
 	// The values that can be updated through the application.
-	protected $fillable = ['procedure_date', 'last_step', 'next_step', 'completed', 'hospital_id', 'created_by', 'last_modified_by'];
+	protected $fillable = ['procedure_date', 'po_number', 'special_notes', 'completed', 'hospital_id', 'created_by', 'last_modified_by'];
 
 	// Gets the hospital associated with this invoice.
 	public function hospital()
@@ -61,5 +61,10 @@ class Invoice extends Model
 	public function invoiceSections()
 	{
 		return $this->belongsToMany('App\Models\InvoiceSection')->withPivot('completed');
+	}
+	
+	public function invoiceFiles()
+	{
+		return $this->hasMany('App\Models\InvoiceFile');
 	}
 }

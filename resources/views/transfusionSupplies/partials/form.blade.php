@@ -1,7 +1,5 @@
 <style>
-    
-    
-
+        
     /* The total progress gets shown by event listeners */
     #total-progress {
       opacity: 0;
@@ -31,6 +29,8 @@
 
 
   </style>
+  
+  
 <div class="panel panel-primary" id = "additionalSuppliesPanel">
 	<div class="panel-heading">
 		<h3 class="panel-title">Additional Supplies</h3>
@@ -145,17 +145,6 @@
 	</div>
 </div>
 
-<div class="panel panel-primary" id = "notes">
-	<div class="panel-heading">
-		<h3 class="panel-title">Notes</h3>
-	</div>
-	<div class="panel-body">	
-		<div class="form-group">
-			<p>Notes Here</p>
-		</div>
-	</div>
-</div>
-
 <div class="panel panel-primary" id = "files">
 	<div class="panel-heading">
 		<h3 class="panel-title">Upload Files</h3>
@@ -231,7 +220,7 @@ var previewTemplate = previewNode.parentNode.innerHTML;
 previewNode.parentNode.removeChild(previewNode);
 
 var myDropzone = new Dropzone("#actions", {
-  url: "/uploadFiles", 
+  url: "{{route('uploadFiles')}}", 
   maxFilesize: 2,
   previewsContainer: "#previews",
   clickable: ".fileinput-button",
@@ -247,8 +236,26 @@ var myDropzone = new Dropzone("#actions", {
     
     myDropzone.on("sending", function(file, xhr, formData) {
       // Show the total progress bar when upload starts
-      document.querySelector("#total-progress").style.opacity = "1";
+	  var invoice_id = null;
+	  if($("input[name=invoice_id]").val()  != null)
+	  {
+	  	invoice_id = $("input[name=invoice_id]").val();
+	  }
+	  else
+	  {	
+		  <?php 
+		  	if(!isset($model))
+			  {
+				  $model = (object)array('invoice_id'=>0);
+				 
+			  }
+			?>	  			
+		  invoice_id = <?php echo ($model->invoice_id); ?>;
+	  }
+	  
+	  document.querySelector("#total-progress").style.opacity = "1";
       formData.append("_token", $("input[name=_token]").val());
+	  formData.append("invoice_id", invoice_id);
     });
     
     // Hide the total progress bar when nothing's uploading anymore

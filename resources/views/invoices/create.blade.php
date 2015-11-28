@@ -107,8 +107,80 @@
   		});
 		
   		return tot;
+	}	
+		
+	function getTotalMinutes(t)
+	{		
+		var timeToConvert = t.split(':');
+		
+		var hours = timeToConvert[0] % 24;
+		alert(hours);
+		if(hours == 0)
+		{
+			hours = 24;
+		}
+		
+		var totalMinutes = hours * 60 + parseInt(timeToConvert[1]);
+		alert(totalMinutes);
+		return totalMinutes;
+	}
+			
+	function getTimeDuration(time1, time2)
+	{
+		if(time1 == "" || time2 == "")
+		{
+			return "00:00";
+		}
+		
+		alert(time1);
+		alert(time2);
+		var startTimeInMinutes = getTotalMinutes(time1);
+		var endTimeInMinutes = getTotalMinutes(time2);
+		
+		var duration = endTimeInMinutes - startTimeInMinutes;
+		return convertMinutesToHHMM(duration);
 	}
 	
+	function convertMinutesToHHMM(totalMinutes)
+	{
+		var hours = Math.floor(totalMinutes / 60);
+		var minutes = totalMinutes - hours * 60
+		
+		var hoursString = hours.toString();
+		var minutesString = minutes.toString();
+		
+		if(hoursString.length < 2)
+		{	
+			hoursString = "0" + hoursString;
+		}
+		
+		if(minutesString.length < 2)
+		{
+			minutesString = "0" + minutesString;
+		}
+		
+		return hoursString + ":" + minutesString;
+	}
+	
+	// When using the document ready event you can actually put the script in the header section since the code will not be ran until the page is fully loaded.
+	$(document).ready(function()
+	{					
+		$("#operation_start_time").blur(function()
+		{
+			var start = $("#operation_start_time").val();
+			var end = $("#operation_end_time").val();
+									
+			$("#total_time").val(getTimeDuration(start, end));
+		});
+		
+		$("#operation_end_time").blur(function()
+		{
+			var start = $("#operation_start_time").val();
+			var end = $("#operation_end_time").val();
+						
+			$("#total_time").val(getTimeDuration(start, end));
+		});
+	});	
 	/*$('#surgeon_list').select2(
 		{placeholder: "Select a surgeon"}
 	);	

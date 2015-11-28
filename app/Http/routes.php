@@ -52,26 +52,7 @@ Route::get('previousProcessStep/{invoice_id}', ['as'=>'previousProcessStep',
 
 // For authentication
 Route::controllers(['auth'=>'Auth\AuthController', 'password'=>'Auth\PasswordController']);
-Route::post('uploadFiles', ['as'=>'uploadFiles', function(Request $request)
-    {
-        //dd(Input::all());
-        $file = Input::file('file');
-        $success = false;
-		if($file->isValid())
-		{			
-			$storage_path = storage_path().'/invoice_files/';
-			$success = $file->move($storage_path, $file->getClientOriginalName());			
-		}
-		
-        if($success)
-        {
-            return response('success')->header('Content-Type', 'text/css');
-        }
-        else
-        {
-            return 'error uploading file.';
-        }
-    }]);
+Route::post('uploadFiles', ['as'=>'uploadFiles', 'uses'=>'InvoiceFilesController@store']);
 Route::get('files', function()
     {
        return view('files.create'); 

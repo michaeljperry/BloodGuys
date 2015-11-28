@@ -13,6 +13,16 @@ use Carbon\Carbon;
 class ProcedureInformationController extends Controller {
 
 	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
+	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
@@ -51,8 +61,23 @@ class ProcedureInformationController extends Controller {
 		$collection_start_time = $request['collection_start_time'];
 		$operation_end_time = $request['operation_end_time'];
 		$wash_time = $request['wash_time'];
-						
-		$procedureInfo = ProcedureInformation::create(['physician_order'=>$physician_order, 'method_group'=>$method_group, 'procedure'=>$procedure, 'operation_start_time'=>$operation_start_time, 'collection_start_time'=>$collection_start_time, 'operation_end_time'=>$operation_end_time, 'wash_time'=>$wash_time, 'invoice_id'=>$invoice_id]);
+		$total_time = $request['total_time'];
+				
+		/*$start_time = Carbon::parse($operation_start_time);
+		$end_time = Carbon::parse($operation_end_time);
+			
+		if($end_time->hour < $start_time->hour)
+		{
+			$end_time->addDay();
+		}
+		
+		$hours = $start_time->diffInHours($end_time);
+		$minutes = $start_time->diffInMinutes($end_time) - $hours * 60;
+		$total_time = Carbon::createFromTime($hours, $minutes, 0, 'America/Los_Angeles');
+				
+		dd($total_time);
+		*/
+		$procedureInfo = ProcedureInformation::create(['physician_order'=>$physician_order, 'method_group'=>$method_group, 'procedure'=>$procedure, 'operation_start_time'=>$operation_start_time, 'collection_start_time'=>$collection_start_time, 'operation_end_time'=>$operation_end_time, 'total_time'=>$total_time, 'wash_time'=>$wash_time, 'invoice_id'=>$invoice_id]);
 		
 		// Update the section information for this invoice
 		CompleteInvoiceSection($invoice_id, 4);
@@ -106,6 +131,7 @@ class ProcedureInformationController extends Controller {
 		$procedureInfo->operation_start_time = $request['operation_start_time'];
 		$procedureInfo->collection_start_time = $request['collection_start_time'];
 		$procedureInfo->operation_end_time = $request['operation_end_time'];
+		$procedureInfo->total_time = $request['total_time'];
 		$procedureInfo->wash_time = $request['wash_time'];
 		$procedureInfo->save();
 		

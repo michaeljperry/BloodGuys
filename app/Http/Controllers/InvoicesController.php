@@ -66,6 +66,8 @@ class InvoicesController extends Controller
         // Get the information from the form
         $procedure_date = $request['procedure_date'];
         $hospital_id = $request['hospital_id'];
+        $po_number = $request['po_number'];
+        $special_notes = $request['special_notes'];
         
         // Get information about the user that created the invoice
         $created_by = Auth::user()->name;
@@ -76,8 +78,8 @@ class InvoicesController extends Controller
         $invoice = new Invoice(
             [
                 'procedure_date' => $procedure_date,
-                'last_step' => ' ',
-                'next_step' => ' ',
+                'po_number' => $po_number,
+                'special_notes' => $special_notes,
                 'completed' => $completed,                
                 'hospital_id' => $hospital_id,
                 'created_by' => $created_by,
@@ -137,6 +139,7 @@ class InvoicesController extends Controller
     {     
         $hospitals = Hospital::all();
         $parameters = array('date' => null, 'hospitals'=> $hospitals);
+        
         return EditInvoiceSection($invoice, $invoice, $invoiceSection, $parameters);       
     }
 
@@ -167,12 +170,16 @@ class InvoicesController extends Controller
         // Get the information from the form
         $procedure_date = $request['procedure_date'];
         $hospital_id = $request['hospital_id'];
+        $po_number = $request['po_number'];
+        $special_notes = $request['special_notes'];
         
         // Get information about the user that created the invoice
         $last_modified_by = Auth::user()->name;
         
         $invoice->procedure_date = $procedure_date;
         $invoice->hospital_id = $hospital_id;
+        $invoice->po_number = $po_number;
+        $invoice->special_notes = $special_notes;
         $invoice->last_modified_by = $last_modified_by;
         $invoice->save();
     }

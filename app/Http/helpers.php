@@ -5,6 +5,8 @@ use App\Models\Invoice;
 use App\Models\InvoiceSection;	
 use App\Http\Requests;
 use Illuminate\Http\Request;
+//use ChromePhp;
+
 
 function delete_form($routeParams, $label = 'Delete')
 {
@@ -159,7 +161,7 @@ function DisplayProcessStep($invoice_id, $parameters = array())
 {	
 	// Get the current process step
 	$current_process_step = Session::get('current_process_step');
-				
+	ChromePhp::log('current process step: '.$current_process_step);			
 	$current_step = GetProcessStep($current_process_step);
 	
 	$previous_step_url = null;
@@ -170,11 +172,13 @@ function DisplayProcessStep($invoice_id, $parameters = array())
 		$previous_step_url = route('previousProcessStep', ['invoice_id'=>$invoice_id]);	
 	}	
 	
+	ChromePhp::log('Adding parameters');
 	// add common parameters
 	$parameters['invoice_id'] = $invoice_id;
 	$parameters['current_step'] = $current_step;	
 	$parameters['previous_step_url'] = $previous_step_url;
 	
+	ChromePhp::log('returning invoices.create');
 	return view('invoices.create', $parameters);	
 }
 

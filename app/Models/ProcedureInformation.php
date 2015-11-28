@@ -8,6 +8,6 @@ class ProcedureInformation extends Model {
 	protected $table = 'procedure_information';
 	
 	// Tell Eloquent which attributes are fillable
-	protected $fillable = ['procedure_date', 'physician_order', 'method_group', 'procedure', 'operation_start_time', 'collection_start_time', 'operation_end_time', 'wash_time', 'invoice_id'];
+	protected $fillable = ['procedure_date', 'physician_order', 'method_group', 'procedure', 'operation_start_time', 'collection_start_time', 'operation_end_time', 'total_time', 'wash_time', 'invoice_id'];
 
 }

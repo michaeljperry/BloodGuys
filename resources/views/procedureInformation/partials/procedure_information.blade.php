@@ -33,6 +33,11 @@
 		</div>
 		
 		<div class="form-group">
+			{!! Form::label('total_time', 'Total Time', ['class' => 'control-label readonly']) !!}
+			{!! Form::text('total_time', null, ['id'=>'total_time', 'class'=>'form-control']) !!}							
+		</div>
+		
+		<div class="form-group">
 			{!! Form::label('wash_time', 'Wash Time', ['class' => 'control-label']) !!}
 			{!! Form::input('Time', 'wash_time', $wash_time, ['id'=>'wash_time', 'class'=>'form-control']) !!}							
 		</div>	

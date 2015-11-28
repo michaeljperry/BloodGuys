@@ -7,7 +7,10 @@
 			{!! Form::label('procedure_date', 'Date', ['class'=>'control-label']) !!}
 			{!! Form::input('Date', 'procedure_date', $date, ['id'=>'procedure_date', 'class'=>'form-control']) !!}
 		</div>
-		
+		<div class="form-group">
+			{!! Form::label('po_number', 'PO #') !!}
+			{!! Form::text('po_number', null, ['class'=>'form-control', 'maxlength'=>20]) !!}
+		</div>
 		<div class="form-group">
 			{!! Form::label('hospital_id', 'Hosptial') !!}
 			{!! Form::select('hospital_id', array_pluck($hospitals, 'name', 'id'), null, ['class'=>'form-control', 'id'=>'hospital_id']) !!}
@@ -16,6 +19,10 @@
 		<div class="form-group">
 			{!! Form::label('State', 'State') !!}
 			{!! Form::text('State', 'CA', ['class'=>'form-control', 'placeholder'=>'state']) !!}	
-		</div>		
+		</div>					
+		<div class="form-group">
+			{!! Form::label('special_notes', 'Notes') !!}
+			{!! Form::textarea('special_notes', null, ['class'=>'form-control', 'id'=>'special_notes']) !!}
+		</div>
 	</div>
 </div>
