@@ -66,12 +66,9 @@ class EquipmentController extends Controller {
 				'invoice_id' => $invoice_id		
 			]
 		);
-		
-		// Update the section information for this invoice
-		CompleteInvoiceSection($invoice_id, 8);
-		
+				
 		// Setup next view		        
-        return NextProcessStep($invoice_id);
+        return determineNextStep($_POST['action'], $equipment->invoice_id);
 	}
 
 	/**
@@ -120,14 +117,7 @@ class EquipmentController extends Controller {
 		
 		$equipment->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($equipment->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }
+		return determineNextStep($_POST['action'], $equipment->invoice_id);
 	}
 
 	/**

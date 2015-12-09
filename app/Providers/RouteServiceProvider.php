@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider {
 		$router->model('transfusionServices', 'App\Models\TransfusionServices');
 		$router->model('transfusionSupplies', 'App\Models\TransfusionSupplies');
 		$router->model('invoiceSection', 'App\Models\InvoiceSection');
+		$router->model('users', 'App\User');
 		//
 	}
 

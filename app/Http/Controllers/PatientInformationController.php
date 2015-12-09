@@ -64,12 +64,9 @@ class PatientInformationController extends Controller
 		
 		// Save Patient Information
 		$patientInfo = PatientInformation::create(['first_name'=>$first_name, 'last_name'=>$last_name, 'patient_number'=>$patient_number, 'medical_record_number'=>$medical_record_number, 'invoice_id'=>$invoice_id]);
-	
-		// Update the section information for this invoice
-		CompleteInvoiceSection($invoice_id, 3);
-	
+			
 		// Goto next process step
-		return NextProcessStep($invoice_id);		
+		return determineNextStep($_POST['action'], $patientInfo->invoice_id); 		
 	}
 
 	/**
@@ -111,14 +108,7 @@ class PatientInformationController extends Controller
 		
 		$patientInfo->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($patientInfo->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }           
+		return determineNextStep($_POST['action'], $patientInfo->invoice_id);       
 	}
 
 	/**

@@ -2,12 +2,6 @@
 
 @section('content')
 
-@if(Session::has('flash_message'))
-	<div class="alert alert-success">
-		{{ Session::get('flash_message') }}
-	</div>
-@endif
-
 <h1>Professions</h1>
 <br/>
 <table class="table table-striped table-bordered table-hover table-responsive">

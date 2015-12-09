@@ -33,7 +33,7 @@
   
 <div class="panel panel-primary" id = "additionalSuppliesPanel">
 	<div class="panel-heading">
-		<h3 class="panel-title">Additional Supplies</h3>
+		<h3 class="panel-title">Autotransfusion Supplies</h3>
 	</div>
 	<div class="panel-body">	
 		<div class="form-group  table-responsive">				
@@ -55,8 +55,8 @@
 						<td>{!! Form::text('wash_kit_manufacturer', ' ', ['class'=>'form-control', 'id'=>'wash_kit_manufacturer']) !!}</td>
 						<td>{!! Form::text('wash_kit_product_id_number', ' ', ['class'=>'form-control', 'id'=>'wash_kit_product_id_number']) !!}</td>
 						<td>{!! Form::text('wash_kit_quantity', $default, ['class'=>'form-control', 'id'=>'wash_kit_quantity']) !!}</td>
-						<td>{!! Form::text('wash_kit_charge', $default, ['class'=>'form-control', 'id'=>'wash_kit_charge']) !!}</td>
-						<td>{!! Form::text('wash_kit_total', $default, ['class'=>'form-control', 'id'=>'wash_kit_total', 'readonly']) !!}</td>											 
+						<td>{!! Form::text('wash_kit_charge', $default, ['class'=>'form-control charge', 'id'=>'wash_kit_charge']) !!}</td>
+						<td>{!! Form::text('wash_kit_total', $default, ['class'=>'form-control total', 'id'=>'wash_kit_total', 'readonly']) !!}</td>											 
 					</tr>						
 						
 					<tr>
@@ -64,8 +64,8 @@
 						<td>{!! Form::text('reservoir_manufacturer', ' ', ['class'=>'form-control', 'id'=>'reservoir_manufacturer']) !!}</td>
 						<td>{!! Form::text('reservoir_product_id_number', ' ', ['class'=>'form-control', 'id'=>'reservoir_product_id_number']) !!}</td>
 						<td>{!! Form::text('reservoir_quantity', $default, ['class'=>'form-control', 'id'=>'reservoir_quantity']) !!}</td>
-						<td>{!! Form::text('reservoir_charge', $default, ['class'=>'form-control', 'id'=>'reservoir_charge']) !!}</td>
-						<td>{!! Form::text('reservoir_total', $default, ['class'=>'form-control', 'id'=>'reservoir_total', 'readonly']) !!}</td>						
+						<td>{!! Form::text('reservoir_charge', $default, ['class'=>'form-control charge', 'id'=>'reservoir_charge']) !!}</td>
+						<td>{!! Form::text('reservoir_total', $default, ['class'=>'form-control total', 'id'=>'reservoir_total', 'readonly']) !!}</td>						
 					</tr>	
 					
 					<tr>
@@ -73,8 +73,8 @@
 						<td>{!! Form::text('aspiration_assembly_manufacturer', ' ', ['class'=>'form-control', 'id'=>'aspiration_assembly_manufacturer']) !!}</td>
 						<td>{!! Form::text('aspiration_assembly_product_id_number', ' ', ['class'=>'form-control', 'id'=>'aspiration_assembly_product_id_number']) !!}</td>
 						<td>{!! Form::text('aspiration_assembly_quantity', $default, ['class'=>'form-control', 'id'=>'aspiration_assembly_quantity']) !!}</td>
-						<td>{!! Form::text('aspiration_assembly_charge', $default, ['class'=>'form-control', 'id'=>'aspiration_assembly_charge']) !!}</td>
-						<td>{!! Form::text('aspiration_assembly_total', $default, ['class'=>'form-control', 'id'=>'aspiration_assembly_total', 'readonly']) !!}</td>											 
+						<td>{!! Form::text('aspiration_assembly_charge', $default, ['class'=>'form-control charge', 'id'=>'aspiration_assembly_charge']) !!}</td>
+						<td>{!! Form::text('aspiration_assembly_total', $default, ['class'=>'form-control total', 'id'=>'aspiration_assembly_total', 'readonly']) !!}</td>											 
 					</tr>						
 						
 					<tr>
@@ -82,8 +82,8 @@
 						<td>{!! Form::text('blood_bag_manufacturer', ' ', ['class'=>'form-control', 'id'=>'blood_bag_manufacturer']) !!}</td>
 						<td>{!! Form::text('blood_bag_product_id_number', ' ', ['class'=>'form-control', 'id'=>'blood_bag_product_id_number']) !!}</td>
 						<td>{!! Form::text('blood_bag_quantity', $default, ['class'=>'form-control', 'id'=>'blood_bag_quantity']) !!}</td>
-						<td>{!! Form::text('blood_bag_charge', $default, ['class'=>'form-control', 'id'=>'blood_bag_charge']) !!}</td>
-						<td>{!! Form::text('blood_bag_total', $default, ['class'=>'form-control', 'id'=>'blood_bag_total', 'readonly']) !!}</td>						
+						<td>{!! Form::text('blood_bag_charge', $default, ['class'=>'form-control charge', 'id'=>'blood_bag_charge']) !!}</td>
+						<td>{!! Form::text('blood_bag_total', $default, ['class'=>'form-control total', 'id'=>'blood_bag_total', 'readonly']) !!}</td>						
 					</tr>
 					
 					<tr>
@@ -91,8 +91,8 @@
 						<td>{!! Form::text('vacuum_tubing_manufacturer', ' ', ['class'=>'form-control', 'id'=>'vacuum_tubing_manufacturer']) !!}</td>
 						<td>{!! Form::text('vacuum_tubing_product_id_number', ' ', ['class'=>'form-control', 'id'=>'vacuum_tubing_product_id_number']) !!}</td>
 						<td>{!! Form::text('vacuum_tubing_quantity', $default, ['class'=>'form-control', 'id'=>'vacuum_tubing_quantity']) !!}</td>
-						<td>{!! Form::text('vacuum_tubing_charge', $default, ['class'=>'form-control', 'id'=>'vacuum_tubing_charge']) !!}</td>
-						<td>{!! Form::text('vacuum_tubing_total', $default, ['class'=>'form-control', 'id'=>'vacuum_tubing_total', 'readonly']) !!}</td>											 
+						<td>{!! Form::text('vacuum_tubing_charge', $default, ['class'=>'form-control charge', 'id'=>'vacuum_tubing_charge']) !!}</td>
+						<td>{!! Form::text('vacuum_tubing_total', $default, ['class'=>'form-control total', 'id'=>'vacuum_tubing_total', 'readonly']) !!}</td>											 
 					</tr>						
 						
 					<tr>
@@ -100,8 +100,8 @@
 						<td>{!! Form::text('wound_drain_manufacturer', ' ', ['class'=>'form-control', 'id'=>'wound_drain_manufacturer']) !!}</td>
 						<td>{!! Form::text('wound_drain_product_id_number', ' ', ['class'=>'form-control', 'id'=>'wound_drain_product_id_number']) !!}</td>
 						<td>{!! Form::text('wound_drain_quantity', $default, ['class'=>'form-control', 'id'=>'wound_drain_quantity']) !!}</td>
-						<td>{!! Form::text('wound_drain_charge', $default, ['class'=>'form-control', 'id'=>'wound_drain_charge']) !!}</td>
-						<td>{!! Form::text('wound_drain_total', $default, ['class'=>'form-control', 'id'=>'wound_drain_total', 'readonly']) !!}</td>						
+						<td>{!! Form::text('wound_drain_charge', $default, ['class'=>'form-control charge', 'id'=>'wound_drain_charge']) !!}</td>
+						<td>{!! Form::text('wound_drain_total', $default, ['class'=>'form-control total', 'id'=>'wound_drain_total', 'readonly']) !!}</td>						
 					</tr>
 					
 					<tr>
@@ -109,8 +109,8 @@
 						<td>{!! Form::text('y_connector_manufacturer', ' ', ['class'=>'form-control', 'id'=>'y_connector_manufacturer']) !!}</td>
 						<td>{!! Form::text('y_connector_product_id_number', ' ', ['class'=>'form-control', 'id'=>'y_connector_product_id_number']) !!}</td>
 						<td>{!! Form::text('y_connector_quantity', $default, ['class'=>'form-control', 'id'=>'y_connector_quantity']) !!}</td>
-						<td>{!! Form::text('y_connector_charge', $default, ['class'=>'form-control', 'id'=>'y_connector_charge']) !!}</td>
-						<td>{!! Form::text('y_connector_total', $default, ['class'=>'form-control', 'id'=>'y_connector_total', 'readonly']) !!}</td>											 
+						<td>{!! Form::text('y_connector_charge', $default, ['class'=>'form-control charge', 'id'=>'y_connector_charge']) !!}</td>
+						<td>{!! Form::text('y_connector_total', $default, ['class'=>'form-control total', 'id'=>'y_connector_total', 'readonly']) !!}</td>											 
 					</tr>						
 						
 					<tr>
@@ -118,8 +118,8 @@
 						<td>{!! Form::text('blood_filter_manufacturer', ' ', ['class'=>'form-control', 'id'=>'blood_filter_manufacturer']) !!}</td>
 						<td>{!! Form::text('blood_filter_product_id_number', ' ', ['class'=>'form-control', 'id'=>'blood_filter_product_id_number']) !!}</td>
 						<td>{!! Form::text('blood_filter_quantity', $default, ['class'=>'form-control', 'id'=>'blood_filter_quantity']) !!}</td>
-						<td>{!! Form::text('blood_filter_charge', $default, ['class'=>'form-control', 'id'=>'blood_filter_charge']) !!}</td>
-						<td>{!! Form::text('blood_filter_total', $default, ['class'=>'form-control', 'id'=>'blood_filter_total', 'readonly']) !!}</td>						
+						<td>{!! Form::text('blood_filter_charge', $default, ['class'=>'form-control charge', 'id'=>'blood_filter_charge']) !!}</td>
+						<td>{!! Form::text('blood_filter_total', $default, ['class'=>'form-control total', 'id'=>'blood_filter_total', 'readonly']) !!}</td>						
 					</tr>								
 					
 					<tr>
@@ -127,8 +127,8 @@
 						<td>{!! Form::text('acda_bag_manufacturer', ' ', ['class'=>'form-control', 'id'=>'acda_bag_manufacturer']) !!}</td>
 						<td>{!! Form::text('acda_bag_product_id_number', ' ', ['class'=>'form-control', 'id'=>'acda_bag_product_id_number']) !!}</td>
 						<td>{!! Form::text('acda_bag_quantity', $default, ['class'=>'form-control', 'id'=>'acda_bag_quantity']) !!}</td>
-						<td>{!! Form::text('acda_bag_charge', $default, ['class'=>'form-control', 'id'=>'acda_bag_charge']) !!}</td>
-						<td>{!! Form::text('acda_bag_total', $default, ['class'=>'form-control', 'id'=>'acda_bag_total', 'readonly']) !!}</td>											 
+						<td>{!! Form::text('acda_bag_charge', $default, ['class'=>'form-control charge', 'id'=>'acda_bag_charge']) !!}</td>
+						<td>{!! Form::text('acda_bag_total', $default, ['class'=>'form-control total', 'id'=>'acda_bag_total', 'readonly']) !!}</td>											 
 					</tr>						
 						
 					<tr>
@@ -136,9 +136,14 @@
 						<td>{!! Form::text('misc_manufacturer', ' ', ['class'=>'form-control', 'id'=>'misc_manufacturer']) !!}</td>
 						<td>{!! Form::text('misc_product_id_number', ' ', ['class'=>'form-control', 'id'=>'misc_product_id_number']) !!}</td>
 						<td>{!! Form::text('misc_quantity', $default, ['class'=>'form-control', 'id'=>'misc_quantity']) !!}</td>
-						<td>{!! Form::text('misc_charge', $default, ['class'=>'form-control', 'id'=>'misc_charge']) !!}</td>
-						<td>{!! Form::text('misc_total', $default, ['class'=>'form-control', 'id'=>'misc_total', 'readonly']) !!}</td>						
-					</tr>								
+						<td>{!! Form::text('misc_charge', $default, ['class'=>'form-control charge', 'id'=>'misc_charge']) !!}</td>
+						<td>{!! Form::text('misc_total', $default, ['class'=>'form-control total', 'id'=>'misc_total', 'readonly']) !!}</td>						
+					</tr>		
+					<tr>
+						<td>Total Supplies Charge</td>
+						<td colspan=4/>
+						<td>{!! Form::text('supplies_total', null, ['class'=>'form-control', 'readonly', 'id'=>'supplies_total']) !!}</td>
+					</tr>						
 				</tbody>
 			</table>		
 		</div>				
@@ -152,63 +157,60 @@
 	<div class="panel-body">	
 		<div id="actions" class="row">
 
-      <div class="col-lg-4">
-        <!-- The fileinput-button span is used to style the file input field as button -->
-        <span class="btn btn-success fileinput-button">
-            <i class="glyphicon glyphicon-plus"></i>
-            <span>Add files...</span>
-        </span>        
-        <button type="reset" class="btn btn-warning cancel">
-            <i class="glyphicon glyphicon-ban-circle"></i>
-            <span>Cancel upload</span>
-        </button>
-      </div>
+			<div class="col-lg-4">
+				<!-- The fileinput-button span is used to style the file input field as button -->
+				<span class="btn btn-success fileinput-button">
+					<i class="glyphicon glyphicon-plus"></i>
+					<span>Add files...</span>
+				</span>        
+				<button type="reset" class="btn btn-warning cancel">
+					<i class="glyphicon glyphicon-ban-circle"></i>
+					<span>Cancel upload</span>
+				</button>
+			</div>
 
-      <div class="col-lg-4">
-        <!-- The global file processing state -->
-        <span class="fileupload-process">
-          <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-          </div>
-        </span>
-      </div>
+			<div class="col-lg-4">
+				<!-- The global file processing state -->
+				<span class="fileupload-process">
+				<div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+					<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+				</div>
+				</span>
+			</div>
+    	</div>
 
-    </div>
 
-
-	<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
-	<div class="table table-striped" class="files" id="previews">
-		<div id="template" class="file-row">
-		<!-- This is used as the file preview template -->
-		<div>
-			<span class="preview"><img data-dz-thumbnail /></span>
-		</div>
-		<div>
-			<p class="name" data-dz-name></p>
-			<strong class="error text-danger" data-dz-errormessage></strong>
-		</div>
-		<div>
-			<p class="size" data-dz-size></p>
-			<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-			<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+		<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
+		<div class="table table-striped" class="files" id="previews">
+			<div id="template" class="file-row">
+				<!-- This is used as the file preview template -->
+				<div>
+					<span class="preview"><img data-dz-thumbnail /></span>
+				</div>
+				<div>
+					<p class="name" data-dz-name></p>
+					<strong class="error text-danger" data-dz-errormessage></strong>
+				</div>
+				<div>
+					<p class="size" data-dz-size></p>
+					<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+						<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+					</div>
+				</div>
+				<div>
+					<button data-dz-remove class="btn btn-warning cancel">
+						<i class="glyphicon glyphicon-ban-circle"></i>
+						<span>Cancel</span>
+					</button>
+					<button data-dz-remove class="btn btn-danger delete">
+						<i class="glyphicon glyphicon-trash"></i>
+						<span>Delete</span>
+					</button>
+				</div>
 			</div>
 		</div>
-		<div>
-			<button data-dz-remove class="btn btn-warning cancel">
-				<i class="glyphicon glyphicon-ban-circle"></i>
-				<span>Cancel</span>
-			</button>
-			<button data-dz-remove class="btn btn-danger delete">
-				<i class="glyphicon glyphicon-trash"></i>
-				<span>Delete</span>
-			</button>
-		</div>
-	
-	</div>
-
 	</div>
 </div>
-
 @section('footer')
 
 <script>
@@ -270,6 +272,52 @@ var myDropzone = new Dropzone("#actions", {
 document.querySelector("#actions .cancel").onclick = function() {
   myDropzone.removeAllFiles(true);
 };	
+
+// Calculate grand total
+$(".charge").blur(function() {
+	var sum = 0;
+	$(".total").each(function() {
+		sum += Number($(this).val());
+	});
+	
+	$("#supplies_total").val(sum);	
+});
+
+$(this).keyup(function()
+		{
+			$("#ebl_total").val(sumOfColumns("totals", 2, false));
+			$("#rbc_returned_total").val(sumOfColumns("totals", 3, false));
+			$("#wash_amount_total").val(sumOfColumns("totals", 4, false));	
+			
+			$("#wash_kit_total").val( $("#wash_kit_quantity").val() * $("#wash_kit_charge").val() );
+			$("#reservoir_total").val( $("#reservoir_quantity").val() * $("#reservoir_charge").val() );
+			$("#aspiration_assembly_total").val( $("#aspiration_assembly_quantity").val() * $("#aspiration_assembly_charge").val() );
+			$("#blood_bag_total").val( $("#blood_bag_quantity").val() * $("#blood_bag_charge").val() );
+			$("#vacuum_tubing_total").val( $("#vacuum_tubing_quantity").val() * $("#vacuum_tubing_charge").val() );
+			$("#wound_drain_total").val( $("#wound_drain_quantity").val() * $("#wound_drain_charge").val() );
+			$("#y_connector_total").val( $("#y_connector_quantity").val() * $("#y_connector_charge").val() );
+			$("#blood_filter_total").val( $("#blood_filter_quantity").val() * $("#blood_filter_charge").val() );
+			$("#acda_bag_total").val( $("#acda_bag_quantity").val() * $("#acda_bag_charge").val() );
+			$("#misc_total").val( $("#misc_quantity").val() * $("#misc_charge").val() );
+			
+			$("#basic_service_total").val( $("#basic_service_quantity").val() * $("#basic_service_charge").val() );
+			$("#modified_service_total").val( $("#modified_service_quantity").val() * $("#modified_service_charge").val() );
+			
+		});
+
+	function sumOfColumns(tableID, columnIndex, hasHeader) 
+	{
+		var tot = 0;
+		$("#" + tableID + " tbody tr" + (hasHeader ? ":gt(0)" : ""))
+		.children("td:nth-child(" + columnIndex + ")")
+		.each(function() 
+		{
+			var value = parseInt($(this).find("input").val());			
+			tot += (isNaN(value) ? 0 : value);
+  		});
+		
+  		return tot;
+	}
 </script>
 
 

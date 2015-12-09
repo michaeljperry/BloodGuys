@@ -58,12 +58,9 @@ class LabInformationController extends Controller {
 		$pre_op_hematocrit = $request['pre_op_hematocrit'];
 		
 		$labInfo = LabInformation::create(['pre_op_hematocrit'=>$pre_op_hematocrit, 'date_taken'=>$date_taken, 'invoice_id'=>$invoice_id]);
-		
-		// Update the section information for this invoice
-		CompleteInvoiceSection($invoice_id, 5);
-		
+				
 		// Setup next view		        
-        return NextProcessStep($invoice_id);
+        return determineNextStep($_POST['action'], $labInfo->invoice_id); 
 	}
 
 	/**
@@ -105,14 +102,7 @@ class LabInformationController extends Controller {
 		$labInfo->pre_op_hematocrit = $request['pre_op_hematocrit'];
 		$labInfo->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($labInfo->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }           
+		return determineNextStep($_POST['action'], $labInfo->invoice_id);      
 	}
 
 	/**

@@ -9,10 +9,8 @@
 	@include($invoice_section->form_path)
 	
 <div class='form-group'>	
-	@if(isset($previous_step_url))
-		<a href="{{ $previous_step_url }}" class="btn btn-primary btn-lg col-xs-3" id = "previous">Prev</a >
-	@endif
-	
+		
+	{!! Form::submit('Previous', ['class'=>'btn btn-primary btn-lg col-xs-3', 'name'=>'action', 'id'=>'Previous']) !!}
 	{!! Form::submit($invoice_section->update_button_text, ['class'=>'btn btn-primary btn-lg col-xs-3 col-xs-offset-1', 'name'=>'action', 'id'=>'update']) !!}
 	{!! Form::submit('Continue', ['class'=>'btn btn-primary btn-lg col-xs-3 col-xs-offset-1', 'name'=>'action', 'id'=>'Continue']) !!}
 	
@@ -54,21 +52,7 @@
 		{
 			$("#ebl_total").val(sumOfColumns("totals", 2, false));
 			$("#rbc_returned_total").val(sumOfColumns("totals", 3, false));
-			$("#wash_amount_total").val(sumOfColumns("totals", 4, false));	
-			
-			$("#wash_kit_total").val( $("#wash_kit_quantity").val() * $("#wash_kit_charge").val() );
-			$("#reservoir_total").val( $("#reservoir_quantity").val() * $("#reservoir_charge").val() );
-			$("#aspiration_assembly_total").val( $("#aspiration_assembly_quantity").val() * $("#aspiration_assembly_charge").val() );
-			$("#blood_bag_total").val( $("#blood_bag_quantity").val() * $("#blood_bag_charge").val() );
-			$("#vacuum_tubing_total").val( $("#vacuum_tubing_quantity").val() * $("#vacuum_tubing_charge").val() );
-			$("#wound_drain_total").val( $("#wound_drain_quantity").val() * $("#wound_drain_charge").val() );
-			$("#y_connector_total").val( $("#y_connector_quantity").val() * $("#y_connector_charge").val() );
-			$("#blood_filter_total").val( $("#blood_filter_quantity").val() * $("#blood_filter_charge").val() );
-			$("#acda_bag_total").val( $("#acda_bag_quantity").val() * $("#acda_bag_charge").val() );
-			$("#misc_total").val( $("#misc_quantity").val() * $("#misc_charge").val() );
-			
-			$("#basic_service_total").val( $("#basic_service_quantity").val() * $("#basic_service_charge").val() );
-			$("#modified_service_total").val( $("#modified_service_quantity").val() * $("#modified_service_charge").val() );
+			$("#wash_amount_total").val(sumOfColumns("totals", 4, false));			
 			
 		});
 
@@ -110,6 +94,11 @@
 		
 		var startTimeInMinutes = getTotalMinutes(time1);
 		var endTimeInMinutes = getTotalMinutes(time2);
+		
+		if(endTimeInMinutes <= startTimeInMinutes)
+		{
+			endTimeInMinutes += 1440;
+		}
 		
 		var duration = endTimeInMinutes - startTimeInMinutes;
 		return convertMinutesToHHMM(duration);
@@ -154,12 +143,20 @@
 						
 			$("#total_time").val(getTimeDuration(start, end));
 		});
+		
+		$('.selectize').selectize({
+			create:true,
+			sortField: 'text',
+			selectOnTab: true,
+			closeAfterSelect: true
+		})
+		
+		/*alert($("#POYes").attr("checked"));
+		alert($("#PONo").attr("checked"));*/
 	});	
-	/*$('#surgeon_list').select2(
-		{placeholder: "Select a surgeon"}
-	);	
+		
 	
-	$('#anesthesiologist_list').select2(
+	/*$('#anesthesiologist_list').select2(
 		{placeholder: "Select a surgeon"}
 	);	
 		

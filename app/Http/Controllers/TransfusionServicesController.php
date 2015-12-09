@@ -71,12 +71,9 @@ class TransfusionServicesController extends Controller {
 				'invoice_id' => $invoice_id
 			]
 		);
-		
-		// Update the section information for this invoice
-		CompleteInvoiceSection($invoice_id, 9);
-		
+				
 		// Setup next view		        
-        return NextProcessStep($invoice_id);
+        return determineNextStep($_POST['action'], $transfusion_service->invoice_id);
 	}
 
 	/**
@@ -126,14 +123,7 @@ class TransfusionServicesController extends Controller {
 		
 		$transfusionServices->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($transfusionServices->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }
+		return determineNextStep($_POST['action'], $transfusionServices->invoice_id);
 	}
 
 	/**

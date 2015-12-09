@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Invoice;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -30,6 +30,7 @@ Route::resource('procedureTotals', 'ProcedureTotalsController');
 Route::resource('equipment', 'EquipmentController');
 Route::resource('transfusionServices', 'TransfusionServicesController');
 Route::resource('transfusionSupplies', 'TransfusionSuppliesController');
+Route::resource('users', 'UsersController');
 
 Route::get('invoices/{invoices}/editInvoice/{invoiceSection}', ['as'=>'editInvoice', 'uses'=>'InvoicesController@editInvoice']);
 Route::get('staffInformation/{invoices}/editInvoice/{invoiceSection}', ['as'=>'editInvoice', 'uses'=>'StaffInformationController@editInvoice']);
@@ -49,6 +50,16 @@ Route::get('previousProcessStep/{invoice_id}', ['as'=>'previousProcessStep',
         $current_process_step = Session::get('current_process_step');
         return SetupProcessStep($invoice_id, $current_process_step - 1);
     }]);
+Route::get('completedInvoice/{showHeaders?}', ['as'=>'completedInvoice', function($showHeaders=true)
+{
+    //$invoices = Invoice::with('hospital', 'patientInformation', 'procedureInformation', 'procedureTotals')->where('completed', '=', true)->get();
+    //$invoices->join('professions', 'professionals.profession_id', '=', 'professions.id')->select(DB::raw('Concat(professionals.last_name, ", ", Left(professionals.first_name, 1)) as professional_name'), 'professions.name', 'professionals.id')->get();
+    $invoices = DB::select("CALL GetCompletedInvoices();");
+    //dd($invoices); 
+    
+    // return the index view for invoices
+    return view('invoices.invoiceForExcel', compact('invoices', 'showHeaders'));
+}]);
 
 // For authentication
 Route::controllers(['auth'=>'Auth\AuthController', 'password'=>'Auth\PasswordController']);

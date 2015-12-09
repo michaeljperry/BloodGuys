@@ -78,12 +78,9 @@ class ProcedureInformationController extends Controller {
 		dd($total_time);
 		*/
 		$procedureInfo = ProcedureInformation::create(['physician_order'=>$physician_order, 'method_group'=>$method_group, 'procedure'=>$procedure, 'operation_start_time'=>$operation_start_time, 'collection_start_time'=>$collection_start_time, 'operation_end_time'=>$operation_end_time, 'total_time'=>$total_time, 'wash_time'=>$wash_time, 'invoice_id'=>$invoice_id]);
-		
-		// Update the section information for this invoice
-		CompleteInvoiceSection($invoice_id, 4);
-		
+				
 		// Setup next view		        
-        return NextProcessStep($invoice_id);	
+        return determineNextStep($_POST['action'], $procedureInfo->invoice_id);  	
 	}
 
 	/**
@@ -135,14 +132,7 @@ class ProcedureInformationController extends Controller {
 		$procedureInfo->wash_time = $request['wash_time'];
 		$procedureInfo->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($procedureInfo->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }           
+		return determineNextStep($_POST['action'], $procedureInfo->invoice_id);    
 	}
 
 	/**

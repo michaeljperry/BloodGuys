@@ -1,23 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
-@if(Session::has('flash_message'))
-	<div class="alert alert-success">
-		{{ Session::get('flash_message') }}
-	</div>
-@endif
-
-@if (count($errors) > 0)
-	<div class="alert alert-danger">
-		<strong>Whoops!</strong> There were some problems with your input.<br><br>
-		<ul>
-			@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
-			@endforeach
-		</ul>
-	</div>
-@endif
 					
 <h1>New Invoice</h1>
 <p>This will take you through the various steps to create an invoice.</p>
@@ -36,10 +19,10 @@
 
 <div class="form-group">
 	@if(isset($previous_step_url))
-		<a href="{{ $previous_step_url }}" class="btn btn-primary btn-lg col-xs-3" id = "previous">Prev</a >
+		{!! Form::submit('Previous', ['class' => 'btn btn-primary btn-lg col-xs-3', 'id' => 'Previous', 'name' => 'action']) !!}
 	@endif
-	<!--<a href="{{ URL::previous() }}" class="btn btn-primary btn-lg col-xs-4 col-xs-offset-1" id = "previous">Save</a >-->
-	{!! Form::submit('Next', ['class'=>'btn btn-primary btn-lg col-xs-3 col-xs-offset-1']) !!}		
+	
+	{!! Form::submit('Continue', ['class'=>'btn btn-primary btn-lg col-xs-3 col-xs-offset-1', 'name'=>'action', 'id'=>'Continue']) !!}		
 </div>
 	
 {!! Form::close() !!}
@@ -114,14 +97,14 @@
 		var timeToConvert = t.split(':');
 		
 		var hours = timeToConvert[0] % 24;
-		alert(hours);
+		
 		if(hours == 0)
 		{
 			hours = 24;
 		}
 		
 		var totalMinutes = hours * 60 + parseInt(timeToConvert[1]);
-		alert(totalMinutes);
+		
 		return totalMinutes;
 	}
 			
@@ -131,11 +114,14 @@
 		{
 			return "00:00";
 		}
-		
-		alert(time1);
-		alert(time2);
-		var startTimeInMinutes = getTotalMinutes(time1);
+				
+		var startTimeInMinutes = getTotalMinutes(time1);		
 		var endTimeInMinutes = getTotalMinutes(time2);
+		
+		if(endTimeInMinutes <= startTimeInMinutes)
+		{
+			endTimeInMinutes += 1440;
+		}
 		
 		var duration = endTimeInMinutes - startTimeInMinutes;
 		return convertMinutesToHHMM(duration);
@@ -169,7 +155,7 @@
 		{
 			var start = $("#operation_start_time").val();
 			var end = $("#operation_end_time").val();
-									
+
 			$("#total_time").val(getTimeDuration(start, end));
 		});
 		
@@ -180,22 +166,14 @@
 						
 			$("#total_time").val(getTimeDuration(start, end));
 		});
-	});	
-	/*$('#surgeon_list').select2(
-		{placeholder: "Select a surgeon"}
-	);	
-	
-	$('#anesthesiologist_list').select2(
-		{placeholder: "Select a surgeon"}
-	);	
 		
-	$('#autotransfusionist_list').select2(
-		{placeholder: "Select a surgeon"}
-	);	
-	
-	$('#autotransfusionist2_list').select2(
-		{placeholder: "Select a surgeon"}
-	);*/	
+		$('.selectize').selectize({
+			create:true,
+			sortField: 'text',
+			selectOnTab: true,
+			closeAfterSelect: true
+		})
+	});		
 	
 </script>
 	

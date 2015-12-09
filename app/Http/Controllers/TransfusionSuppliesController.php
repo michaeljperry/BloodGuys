@@ -50,15 +50,8 @@ class TransfusionSuppliesController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		/*$file = $request->file('file1');
-		if($file->isValid())
-		{
-			$file->move(__DIR__.'/storage/invoice_files/', $file->getClientOriginalName());
-		}
-		else
-		{
-			dd($file->getErrorMessage());
-		}*/
+		// Get the invoice id since it is needed in several places.
+		$invoice_id = $request['invoice_id'];
 		
 		$transfusionSupplies = TransfusionSupplies::create(
 			[		
@@ -121,25 +114,12 @@ class TransfusionSuppliesController extends Controller {
 				'misc_quantity' => $request['misc_quantity'],
 				'misc_charge' => $request['misc_charge'],
 				'misc_total' => $request['misc_total'],
-				
-				'invoice_id' => $request['invoice_id']
+				'supplies_total' => $request['supplies_total'],
+				'invoice_id' => $invoice_id
 			]
 		);
-								
-		// Update the section information for this invoice
-		$invoice_id = $request['invoice_id'];
-		CompleteInvoiceSection($invoice_id, 10);
-		
-		// Complete invoice (should be moved to complete invoice section)
-		$invoice = Invoice::find($invoice_id);
-		$invoice->completed = true;
-		$invoice->save();
-		
-		// Set Flash Message that invoice with id was successfully saved.
-		
-		// Get all invoices
-		$invoices = Invoice::all();		
-		return view('invoices.index', compact('invoices'));	
+				
+		return determineNextStep($_POST['action'], $invoice_id);	
 	}
 
 	/**
@@ -174,19 +154,6 @@ class TransfusionSuppliesController extends Controller {
 	 */
 	public function update(TransfusionSupplies $transfusionSupplies, Request $request)
 	{
-		/*$file = $request->file('file1');
-		if($file->isValid())
-		{			
-			$storage_path = storage_path().'/invoice_files/'.$transfusionSupplies->invoice_id.'/';
-			$success = $file->move($storage_path, $file->getClientOriginalName());
-			dd($success->getRealPath());
-		}
-		else
-		{
-			dd($file->getErrorMessage());
-		}*/
-		
-		//
 		$transfusionSupplies->fill(
 			[		
 				'wash_kit_manufacturer' => $request['wash_kit_manufacturer'],
@@ -247,20 +214,14 @@ class TransfusionSuppliesController extends Controller {
 				'misc_product_id_number' => $request['misc_product_id_number'],
 				'misc_quantity' => $request['misc_quantity'],
 				'misc_charge' => $request['misc_charge'],
-				'misc_total' => $request['misc_total']
+				'misc_total' => $request['misc_total'],
+				'supplies_total' => $request['supplies_total']
 			]
 		);
 		
 		$transfusionSupplies->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($transfusionSupplies->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }
+		return determineNextStep($_POST['action'], $transfusionSupplies->invoice_id);
 	}
 
 	/**

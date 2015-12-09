@@ -10,14 +10,10 @@
 		</div>
 		<div class="panel-body">
 			@foreach($hospitals as $hospital)
-				<strong>{{$hospital->name}}</strong><br>
-				{{$hospital->street_address}}<br>
-				@if(!empty($hospital->street_address_2))
-					{{$hospital->street_address_2}}<br>
-				@endif	
+				<strong>{{$hospital->name}}</strong><br>				
 				{{$hospital->city}}, 
 				{{$hospital->state}}
-				{{$hospital->zip_code}}
+				{{$hospital->anticoagulent_volume}}
 			@endforeach
 		</div>
 		<div class="panel-footer">

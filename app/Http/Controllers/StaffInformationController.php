@@ -4,12 +4,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Models\Profession;
 use App\Models\Professional;
 use App\Models\StaffInformation;
 use App\Models\Invoice;
 use App\Models\InvoiceSection;
 use Webpatser\Uuid\Uuid;
 use Session;
+use DB;
 
 class StaffInformationController extends Controller {
 
@@ -39,12 +41,13 @@ class StaffInformationController extends Controller {
 		$invoice_id = $request['invoice_id'];
 		
 		//Get parameters needed for this form		
-		//select('professionals.first_name', 'professionals.last_name', 'professions.name', 'professionals.id')->get();
-		$professionals = Professional::join('professions', 'professionals.profession_id', '=', 'professions.id')->select('professionals.first_name', 'professionals.last_name', 'professions.name', 'professionals.id')->get();  
+		$professionals = Professional::join('professions', 'professionals.profession_id', '=', 'professions.id')->select(DB::raw('Concat(professionals.last_name, ", ", Left(professionals.first_name, 1)) as professional_name'), 'professions.name', 'professionals.id')->get();  
 		$surgeons = $professionals->where('name', 'Surgeon');
+		
         $anesthesiologists = $professionals->where('name', 'Anesthesiologist');
         $autotransfusionists = $professionals->where('name', 'Autotransfusionist');
-		$parameters = array('surgeons'=>$surgeons, 'anesthesiologists' => $anesthesiologists, 'autotransfusionists' => $autotransfusionists);
+		$default = 'default';
+		$parameters = array('surgeons'=>$surgeons, 'anesthesiologists' => $anesthesiologists, 'autotransfusionists' => $autotransfusionists, 'default'=>$default);
 			
 		return DisplayProcessStep($invoice_id, $parameters);	
 	}
@@ -55,26 +58,26 @@ class StaffInformationController extends Controller {
 	 * @return Response
 	 */
 	public function store(Request $request)
-	{
+	{		
 		// Get form information				
 		$anesthesiologist_id = $request["anesthesiologist_id"];
         $primary_autotransfusionist_id = $request["primary_autotransfusionist_id"];
 		$secondary_autotransfusionist_id = $request["secondary_autotransfusionist_id"];
 		$surgeon_id = $request["surgeon_id"];
-			
+		
+		
+		// Verify Id's
+		$surgeon_id = $this->checkProfessionalId($surgeon_id, 'surgeon');
+		$anesthesiologist_id = $this->checkProfessionalId($anesthesiologist_id, 'anesthesiologist');
+		$primary_autotransfusionist_id  = $this->checkProfessionalId($primary_autotransfusionist_id, 'autotransfusionist');
+		$secondary_autotransfusionist_id  = $this->checkProfessionalId($secondary_autotransfusionist_id, 'autotransfusionist');
+				
         // Storing staff information
         $invoice_id = $request['invoice_id'];
         $staffInfo = StaffInformation::create(['anesthesiologist_id'=>$anesthesiologist_id, 'primary_autotransfusionist_id'=>$primary_autotransfusionist_id, 'secondary_autotransfusionist_id'=>$secondary_autotransfusionist_id, 'surgeon_id'=>$surgeon_id, 'invoice_id'=>$invoice_id]);
-		
-		// Complete this section
-		CompleteInvoiceSection($invoice_id, 2);
-		//Invoice::find($invoice_id)->invoiceSections()->updateExistingPivot(2, ['completed'=>1]);
-		// Add message that staff information section saved
-			
-        // return the create view
-        //return view('invoices.create', compact('invoice_id', 'routeToUse', 'formToUse'));
-		//return redirect()->action('PatientInformationController@create')->with('invoice_id', $invoice_id);
-		return NextProcessStep($invoice_id);       
+				
+		// Go to the next step
+		return determineNextStep($_POST['action'], $staffInfo->invoice_id);       
 	}
 
 	/**
@@ -105,11 +108,12 @@ class StaffInformationController extends Controller {
 		$staffInformation = $invoice->staffInformation;
 		
 		// setup the parameters		
-		$professionals = Professional::join('professions', 'professionals.profession_id', '=', 'professions.id')->select('professionals.first_name', 'professionals.last_name', 'professions.name', 'professionals.id')->get();  
+		$professionals = Professional::join('professions', 'professionals.profession_id', '=', 'professions.id')->select(DB::raw('Case When first_name is null or first_name = "" then last_name else Concat(last_name, ", ", Left(first_name, 1)) end as professional_name'), 'professions.name', 'professionals.id')->get();  
 		$surgeons = $professionals->where('name', 'Surgeon');
         $anesthesiologists = $professionals->where('name', 'Anesthesiologist');
         $autotransfusionists = $professionals->where('name', 'Autotransfusionist');
-		$parameters = array('surgeons' => $surgeons, 'anesthesiologists' => $anesthesiologists, 'autotransfusionists' => $autotransfusionists);
+		$default = null;
+		$parameters = array('surgeons' => $surgeons, 'anesthesiologists' => $anesthesiologists, 'autotransfusionists' => $autotransfusionists, 'default'=>$default);
 		
 		return EditInvoiceSection($staffInformation, $invoice, $invoiceSection, $parameters);				
 	}
@@ -121,23 +125,21 @@ class StaffInformationController extends Controller {
 	 * @return Response
 	 */
 	public function update(StaffInformation $staffInformation, Request $request)
-	{		
+	{
+		$this->validate($request, 
+		[
+			'surgeon_id' => 'required'
+		]);
+								
 		// Get form information				
-		$staffInformation->anesthesiologist_id = $request["anesthesiologist_id"];
-        $staffInformation->primary_autotransfusionist_id = $request["primary_autotransfusionist_id"];
-		$staffInformation->secondary_autotransfusionist_id = $request["secondary_autotransfusionist_id"];
-		$staffInformation->surgeon_id = $request["surgeon_id"];
-		
+		$staffInformation->anesthesiologist_id = $this->checkProfessionalId($request["anesthesiologist_id"], 'anesthesiologist');
+        $staffInformation->primary_autotransfusionist_id = $this->checkProfessionalId($request["primary_autotransfusionist_id"], 'autotransfusionist');
+		$staffInformation->secondary_autotransfusionist_id = $this->checkProfessionalId($request["secondary_autotransfusionist_id"], 'autotransfusionist');
+		$staffInformation->surgeon_id = $this->checkProfessionalId($request["surgeon_id"], 'surgeon');
+						
 		$staffInformation->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($staffInformation->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }           
+		return determineNextStep($_POST['action'], $staffInformation->invoice_id);       
 	}
 
 	/**
@@ -151,4 +153,52 @@ class StaffInformationController extends Controller {
 		//
 	}
 
+	private function checkProfessionalId($id, $profession)
+	{		
+		if($id == 'default') return null;
+		
+		if(!is_numeric($id))
+		{
+			$id = $this->addProfessional($id, $profession);							
+		}
+		
+		return $id;
+	}
+	
+	private function addProfessional($professionalName, $profession)
+	{
+		$delimiter = null;
+						
+		if(strrpos($professionalName, ","))
+		{
+			$delimiter = ",";		
+		}
+		else if(strrpos($professionalName, " "))
+		{
+			$delimiter = " ";
+		}
+		else if(strrpos($professionalName, "."))
+		{
+			$delimiter = ".";
+		}
+		else
+		{
+			// No Delimiter
+			$delimiter = ".";			
+		}
+		
+		$newProfessionalName = explode($delimiter, $professionalName);
+		
+		if(count($newProfessionalName) != 2)
+		{
+			// No first name, use empty string
+			$newProfessionalName[1] = "";
+		}
+		
+		$profession = Profession::where('name', '=', $profession)->firstOrFail();
+		$first_name = trim($newProfessionalName[1]);
+		$last_name = trim($newProfessionalName[0]);
+		$newProfessional = Professional::create(['profession_id'=>$profession->id, 'first_name'=>$first_name, 'last_name'=>$last_name]);
+		return $newProfessional->id;
+	}
 }

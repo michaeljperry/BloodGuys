@@ -1,6 +1,6 @@
 <div class="panel panel-primary" id = "transfusionServicesPanel">
 	<div class="panel-heading">
-		<h3 class="panel-title">Transfusion Services</h3>
+		<h3 class="panel-title">Autotransfusion Charge</h3>
 	</div>
 	<div class="panel-body">	
 		<div class="form-group  table-responsive">				
@@ -17,16 +17,16 @@
 					
 					<tr>
 						<td>Basic Service</td>	
-						<td>{!! Form::text('basic_service_quantity', $default, ['class'=>'form-control', 'id'=>'basic_service_quantity']) !!}</td>
-						<td>{!! Form::text('basic_service_charge', $default, ['class'=>'form-control', 'id'=>'basic_service_charge']) !!}</td>
-						<td>{!! Form::text('basic_service_total', $default, ['class'=>'form-control', 'id'=>'basic_service_total', 'readonly']) !!}</td>											 
+						<td>{!! Form::text('basic_service_quantity', $default, ['class'=>'form-control', 'id'=>'basic_service_quantity', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('basic_service_charge', $default, ['class'=>'form-control', 'id'=>'basic_service_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('basic_service_total', $default, ['class'=>'form-control', 'id'=>'basic_service_total', 'readonly', 'required'=>'true']) !!}</td>											 
 					</tr>						
 						
 					<tr>
 						<td>Modified Service - No Blood Processed</td>
-						<td>{!! Form::text('modified_service_quantity', $default, ['class'=>'form-control', 'id'=>'modified_service_quantity']) !!}</td>
-						<td>{!! Form::text('modified_service_charge', $default, ['class'=>'form-control', 'id'=>'modified_service_charge']) !!}</td>
-						<td>{!! Form::text('modified_service_total', $default, ['class'=>'form-control', 'id'=>'modified_service_total', 'readonly']) !!}</td>						
+						<td>{!! Form::text('modified_service_quantity', $default, ['class'=>'form-control', 'id'=>'modified_service_quantity', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('modified_service_charge', $default, ['class'=>'form-control', 'id'=>'modified_service_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('modified_service_total', $default, ['class'=>'form-control', 'id'=>'modified_service_total', 'readonly', 'required'=>'true']) !!}</td>						
 					</tr>									
 				</tbody>
 			</table>		

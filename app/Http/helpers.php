@@ -5,8 +5,6 @@ use App\Models\Invoice;
 use App\Models\InvoiceSection;	
 use App\Http\Requests;
 use Illuminate\Http\Request;
-//use ChromePhp;
-
 
 function delete_form($routeParams, $label = 'Delete')
 {
@@ -34,53 +32,38 @@ function delete_glyph_icon($routeParams, $glyphIcon = 'glyphicon-trash')
 */
 FormBuilder::macro('buttonToggle', function ($buttons, $buttonGroupName, $divName)
 {	
+	$value = $this->getValueAttribute($buttonGroupName);
+	
+	if($value === null)
+	{
+		$value = $buttons[0]['value'];		
+	}
+	
 	$html = array();
 	
 	$div = '<div class="btn-group" data-toggle="buttons" name="' .$divName. '" id="' .$divName. '">';
 		
-	$label = '<label class="btn btn-primary">';
 	foreach($buttons as $button)
-	{		
+	{
+		$inputOptions = null;		
+		if($value == $button['value'])
+		{
+			$label = '<label class="btn btn-primary active">';
+			$inputOptions['checked'] = "checked";	
+		}
+		else
+		{
+			$label = '<label class="btn btn-primary">';
+		}
+								
 		$inputOptions['id'] = $button['id'];
+		
 		$input = $this->input('radio', $buttonGroupName, $button['value'], $inputOptions);
 		$html[] = $label.$input.$button['text'].'</label>';  
 	}
 			
 	return $div.implode('', $html).'</div>';
 });
-
-/**
-* Creates a binary column with a unique index. The unique index name is $tablename_$columnName_unique.
-* @param string $tableName
-* @param string $columnName
-* @param integer $numberOfBytes
-* @param string $afterColumn
-
-function AddBinaryColumn($tableName, $columnName, $numberOfBytes, $afterColumn, $addIndex = true)
-{
-	DB::statement('ALTER TABLE '.$tableName.' ADD '.$columnName.' BINARY('.$numberOfBytes.') NOT NULL AFTER '.$afterColumn.';');
-	
-	if($addIndex)
-	{
-		DB::statement('CREATE UNIQUE INDEX '.$tableName.'_'.$columnName.'_unique ON '.$tableName.' ('.$columnName.');');
-	}
-}
-*/
-/**
-* Drops a binary column with a unique index. The index that is dropped is $tableName_$columnName_unique.
-* @param string $tableName
-* @param string $columnName
-
-function DropBinaryColumn($tableName, $columnName, $dropIndex = true)
-{
-	if($dropIndex)
-	{
-		DB::statement('DROP INDEX '.$tableName.'_'.$columnName.'_unique ON '.$tableName.';');	
-	}
-	
-	DB::statement('ALTER TABLE '.$tableName.' DROP '.$columnName.';');
-}
-*/
 
 function CompleteInvoiceSection($invoice_id, $invoice_section_id)
 {
@@ -89,7 +72,18 @@ function CompleteInvoiceSection($invoice_id, $invoice_section_id)
 
 function RedirectToInvoicesIndex()
 {
-	$invoices = Invoice::with('hospital')->get();
+	if(Auth::user()->admin)
+	{
+		
+		$invoices = Invoice::with('hospital', 'staffinformation')->get();            
+	}        
+	else
+	{
+		
+		$invoices = Auth::user()->invoices;    
+		$invoices->load('hospital', 'staffinformation');
+	}        
+	
 	return redirect()->route('invoices.index', ['invoices'=>$invoices]);
 }
 
@@ -111,27 +105,6 @@ function GetProcessStep($process_step)
 	return InvoiceSection::where('process_step', '=', $process_step)->first();
 }
 
-/*
-function GetNextProcessStep($current_process_step)
-{
-	// increment the current process step
-	$current_process_step++;
-	
-	// get the next process step
-	return GetProcessStep($current_process_step);
-}
-
-function GetPreviousProcessStep($current_process_step)
-{
-	// decrement the current process step
-	$current_process_step--;
-	
-	// get the previous process step
-	return GetProcessStep($current_process_step);
-}
-*/
-
-//keep
 function GetProcessStepUrl($invoice_id, $process_step)
 {
 	$invoice = Invoice::find($invoice_id);
@@ -161,7 +134,7 @@ function DisplayProcessStep($invoice_id, $parameters = array())
 {	
 	// Get the current process step
 	$current_process_step = Session::get('current_process_step');
-	ChromePhp::log('current process step: '.$current_process_step);			
+	//ChromePhp::log('current process step: '.$current_process_step);			
 	$current_step = GetProcessStep($current_process_step);
 	
 	$previous_step_url = null;
@@ -172,13 +145,13 @@ function DisplayProcessStep($invoice_id, $parameters = array())
 		$previous_step_url = route('previousProcessStep', ['invoice_id'=>$invoice_id]);	
 	}	
 	
-	ChromePhp::log('Adding parameters');
+	//ChromePhp::log('Adding parameters');
 	// add common parameters
 	$parameters['invoice_id'] = $invoice_id;
 	$parameters['current_step'] = $current_step;	
 	$parameters['previous_step_url'] = $previous_step_url;
 	
-	ChromePhp::log('returning invoices.create');
+	//ChromePhp::log('returning invoices.create');
 	return view('invoices.create', $parameters);	
 }
 
@@ -221,9 +194,27 @@ function NextProcessStep($invoice_id)
 		// Set Flash Message that invoice with id was successfully saved.
 		
 		// Get all invoices
-		$invoices = Invoice::all();		
-		return view('invoices.index', compact('invoices'));	
+		return RedirectToInvoicesIndex();
 	}
 	
 	return SetupProcessStep($invoice_id, $current_process_step + 1);
+}
+
+function determineNextStep($postAction, $invoice_id)
+{
+	$current_process_step = Session::get('current_process_step');
+	CompleteInvoiceSection($invoice_id, $current_process_step);
+	
+	if($postAction == 'Continue')
+	{
+		return NextProcessStep($invoice_id);
+	}
+	else if($postAction == 'Previous')
+	{
+		return redirect()->route('previousProcessStep', array('invoice_id'=>$invoice_id));
+	}   
+	else
+	{
+		return RedirectToInvoicesIndex();
+	}
 }

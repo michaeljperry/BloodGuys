@@ -105,12 +105,9 @@ class ProcedureTotalsController extends Controller {
 				'invoice_id' => $invoice_id						
 			]
 		);
-		
-		// Update the section information for this invoice
-		CompleteInvoiceSection($invoice_id, 7);
-		
+				
 		// Setup next view		        
-       return NextProcessStep($invoice_id);
+       return determineNextStep($_POST['action'], $procedure_totals->invoice_id);
 	}
 
 	/**
@@ -178,14 +175,7 @@ class ProcedureTotalsController extends Controller {
 		
 		$procedureTotals->save();
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($procedureTotals->invoice_id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }
+		return determineNextStep($_POST['action'], $procedureTotals->invoice_id);
 	}
 
 	/**

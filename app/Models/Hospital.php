@@ -11,7 +11,7 @@ class Hospital extends Model
     *
     * @var array
     */
-    protected $fillable = ['name', 'street_address', 'street_address_2', 'city', 'zip_code', 'state'];
+    protected $fillable = ['name', 'state', 'anticoagulent_volume'];
     
     public function invoice()
     {

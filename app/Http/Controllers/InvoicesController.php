@@ -31,10 +31,16 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        
-        //$invoices = Auth::user()->invoices();
-        $invoices = Invoice::with('hospital', 'staffInformation')->get();
-                                                 
+        if(Auth::user()->admin)
+        {
+            $invoices = Invoice::with('hospital', 'staffinformation')->get();            
+        }        
+        else
+        {
+            $invoices = Auth::user()->invoices;    
+            $invoices->load('hospital', 'staffinformation');
+        }        
+                                            
         // return the index view for invoices
         return view('invoices.index', compact('invoices'));
     }
@@ -96,17 +102,11 @@ class InvoicesController extends Controller
         $invoice_sections = InvoiceSection::all();
         
         foreach($invoice_sections as $invoice_section)
-        {
-            $completed = false;
-            if($invoice_section->process_step == 1)
-            {
-                $completed = true;
-            }
-            
-            $invoice->invoiceSections()->attach($invoice_section, ['completed' => $completed]);    
+        {            
+            $invoice->invoiceSections()->attach($invoice_section, ['completed' => false]);    
         }
 
-        return NextProcessStep($invoice_id);                              
+        return determineNextStep($_POST['action'], $invoice->id);                             
     }
 
     
@@ -150,20 +150,12 @@ class InvoicesController extends Controller
      * @return Response
      */
     public function update(Invoice $invoice, Request $request)
-    {
-        
+    {        
         InvoicesController::updateModel($invoice, $request);
         
-        if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($invoice->id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }           
+        return determineNextStep($_POST['action'], $invoice->id);            
     }
-       
+            
     public function updateModel(Invoice $invoice, Request $request)
     {
         

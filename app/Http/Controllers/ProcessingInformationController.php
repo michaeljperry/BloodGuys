@@ -40,7 +40,11 @@ class ProcessingInformationController extends Controller {
 	public function create(Request $request)
 	{
 		$invoice_id = $request['invoice_id'];		
-		$parameters = array('numRows'=>1);
+		$invoice = Invoice::find($invoice_id);
+		
+		$anticoag_vol = $invoice->hospital->anticoagulent_volume;
+		
+		$parameters = array('numRows'=>1, 'anticoag_vol'=>$anticoag_vol);
 		
 		return DisplayProcessStep($invoice_id, $parameters);
 	}
@@ -59,24 +63,11 @@ class ProcessingInformationController extends Controller {
 		
 		for($index = 1; $index <= $numRows; $index++)
 		{
-			$record = new ProcessingInformation;
-			
-			$record->column_id = $index;
-			$record->amount_processed = $request["amt_processed_".$index];
-			$record->anticoagulent_volume = $request["anticoag_vol_".$index];			
-			$record->irrigation_volume = $request["irr_vol_".$index];
-			$record->ebl = $request["ebl_".$index];
-			$record->rbcs_salvaged = $request["rbc_".$index];
-			$record->time = $request["time_".$index];
-			$record->invoice_id = $invoice_id;
-			$record->save();			
+			$this->createProcessingRecord($index, $invoice_id, $request);				
 		}
 				
-		// Update the section information for this invoice
-		CompleteInvoiceSection($invoice_id, 6);
-		
 		// Setup next view		        
-        return NextProcessStep($invoice_id);
+        return determineNextStep($_POST['action'], $invoice_id);
 	}
 
 	/**
@@ -144,25 +135,19 @@ class ProcessingInformationController extends Controller {
 		
 		for($index = 1; $index <= $numRows; $index++)
 		{
-			$record = $invoice->processingInformation()->where('column_id', '=', $index)->first();		
-			$record->amount_processed = $request["amt_processed_".$index];
-			$record->anticoagulent_volume = $request["anticoag_vol_".$index];			
-			$record->irrigation_volume = $request["irr_vol_".$index];
-			$record->ebl = $request["ebl_".$index];
-			$record->rbcs_salvaged = $request["rbc_".$index];
-			$record->time = $request["time_".$index];			
-			$record->save();			
+			$record = $invoice->processingInformation()->where('column_id', '=', $index)->first();
+			
+			if($record == null)
+			{
+				$this->createProcessingRecord($index, $invoice->id, $request);	
+			}	
+			else
+			{
+				$this->updateProcessingRecord($record, $index, $request);
+			}					
 		}		
 		
-		if($_POST['action'] == 'Continue')
-        {
-            return NextProcessStep($invoice->id);
-        }
-        else
-        {
-            return RedirectToInvoicesIndex();
-        }           
-		
+		return determineNextStep($_POST['action'], $invoice->id);	
 	}
 
 	/**
@@ -176,4 +161,28 @@ class ProcessingInformationController extends Controller {
 		//
 	}
 
+	private function createProcessingRecord($index, $invoice_id, $request)
+	{
+		$record = new ProcessingInformation;			
+		$record->column_id = $index;
+		$record->amount_processed = $request["amt_processed_".$index];
+		$record->anticoagulent_volume = $request["anticoag_vol_".$index];			
+		$record->irrigation_volume = $request["irr_vol_".$index];
+		$record->ebl = $request["ebl_".$index];
+		$record->rbcs_salvaged = $request["rbc_".$index];
+		$record->time = $request["time_".$index];
+		$record->invoice_id = $invoice_id;
+		$record->save();
+	}
+	
+	private function updateProcessingRecord($record, $index, $request)
+	{			
+		$record->amount_processed = $request["amt_processed_".$index];
+		$record->anticoagulent_volume = $request["anticoag_vol_".$index];			
+		$record->irrigation_volume = $request["irr_vol_".$index];
+		$record->ebl = $request["ebl_".$index];
+		$record->rbcs_salvaged = $request["rbc_".$index];
+		$record->time = $request["time_".$index];			
+		$record->save();	
+	}
 }

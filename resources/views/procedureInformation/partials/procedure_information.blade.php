@@ -16,11 +16,11 @@
 		
 		<div class="form-group">
 			{!! Form::label('procedure', 'Procedure', ['class'=>'control-label']) !!}
-			{!! Form::text('procedure', null, ['id'=>'procedure', 'class'=>'form-control']) !!}	
+			{!! Form::text('procedure', null, ['id'=>'procedure', 'class'=>'form-control', 'required'=>'true']) !!}	
 		</div>
 		<div class="form-group">
 			{!! Form::label('operation_start_time', 'OR Start Time', ['class'=>'control-label']) !!}
-			{!! Form::input('Time', 'operation_start_time', null, ['id'=>'operation_start_time', 'class'=>'form-control']) !!}			
+			{!! Form::input('Time', 'operation_start_time', null, ['id'=>'operation_start_time', 'class'=>'form-control', 'required'=>'true']) !!}			
 		</div>
 		<div class="form-group">
 			{!! Form::label('collection_start_time', 'Collection Start Time', ['class' => 'control-label']) !!}
@@ -29,12 +29,12 @@
 		
 		<div class="form-group">
 			{!! Form::label('operation_end_time', 'OR End Time', ['class' => 'control-label']) !!}
-			{!! Form::input('Time', 'operation_end_time', null, ['id'=>'operation_end_time', 'class'=>'form-control']) !!}							
+			{!! Form::input('Time', 'operation_end_time', null, ['id'=>'operation_end_time', 'class'=>'form-control', 'required'=>'true']) !!}							
 		</div>
 		
 		<div class="form-group">
-			{!! Form::label('total_time', 'Total Time', ['class' => 'control-label readonly']) !!}
-			{!! Form::text('total_time', null, ['id'=>'total_time', 'class'=>'form-control']) !!}							
+			{!! Form::label('total_time', 'Total Time', ['class' => 'control-label']) !!}
+			{!! Form::text('total_time', null, ['id'=>'total_time', 'class'=>'form-control', 'readonly'=>'true', 'required'=>'true']) !!}							
 		</div>
 		
 		<div class="form-group">
