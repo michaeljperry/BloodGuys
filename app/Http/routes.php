@@ -64,7 +64,4 @@ Route::get('completedInvoice/{showHeaders?}', ['as'=>'completedInvoice', functio
 // For authentication
 Route::controllers(['auth'=>'Auth\AuthController', 'password'=>'Auth\PasswordController']);
 Route::post('uploadFiles', ['as'=>'uploadFiles', 'uses'=>'InvoiceFilesController@store']);
-Route::get('files', function()
-    {
-       return view('files.create'); 
-    });
+Route::get('downloadFile/{invoiceFile}', ['as'=>'downloadFile', 'uses'=>'InvoiceFilesController@downloadFile']);

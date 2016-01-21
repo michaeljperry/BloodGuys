@@ -14,6 +14,7 @@
 			<th>Hospital</th>
 			<th>Edit</th>
 			<th>Delete</th>
+            <th>Files</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -24,6 +25,16 @@
 				<td>{{$invoice->hospital->name}}</td>
 				<td><a href="{{action('InvoicesController@edit', $invoice->id)}}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"/></a></td>
 				<td>{!! delete_glyph_icon(['invoices.destroy', $invoice->id]) !!}</td>
+                <td>
+                @if(count($invoice->invoiceFiles) > 0)
+                
+                @foreach($invoice->invoiceFiles as $file)
+                    <a href="{{route('downloadFile', array('invoiceFile'=>$file))}}" download="{{$file->filename}}" class="btn btn-primary btn-sm">{{$file->filename}}</a>
+                @endforeach
+                @else
+                <p>No files</p>
+                @endif
+                </td>
 			</tr>
 		@endforeach		
 	</tbody>

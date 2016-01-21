@@ -6,6 +6,7 @@ use App\Models\InvoiceFile;
 use Illuminate\Http\Request;
 use ChromePhp;
 use Input;
+use Session;
 class InvoiceFilesController extends Controller {
 
 	/**
@@ -48,21 +49,17 @@ class InvoiceFilesController extends Controller {
 		//
 		
 		$invoice_id = $request['invoice_id'];
-		ChromePHP::log('invoice id: '.$invoice_id);
 		
 		$file = Input::file('file');
         $success = false;
 		if($file->isValid())
 		{			
-			ChromePHP::log('file valid');
 			$storage_path = storage_path().'/invoice_files/'.$invoice_id.'/';
-			ChromePHP::log('storage path: '.$storage_path);
 			$success = $file->move($storage_path, $file->getClientOriginalName());			
 		}
 		
         if($success)
         {
-			ChromePHP::log('creating table entry');
 			InvoiceFile::create(['filename'=>$file->getClientOriginalName(), 'invoice_id' => $invoice_id]);
             return response('success')->header('Content-Type', 'text/css');
         }
@@ -71,6 +68,22 @@ class InvoiceFilesController extends Controller {
             return response('error uploading file.')->header('Content-Type', 'text/css');
         }
 	}
+    
+    public function downloadFile(InvoiceFile $file)
+    {
+        $pathToFile = storage_path().'/invoice_files/'.$file->invoice_id.'/'.$file->filename;
+        
+        if(file_exists($pathToFile))
+        {
+            Session::flash('flash_message', 'File download starting . . . ');
+        }
+        else
+        {
+            ChromePHP::log('does not exist');
+        }
+        
+        return response()->download($pathToFile);
+    }
 
 	/**
 	 * Display the specified resource.

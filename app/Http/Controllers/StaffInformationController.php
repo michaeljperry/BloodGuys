@@ -64,8 +64,7 @@ class StaffInformationController extends Controller {
         $primary_autotransfusionist_id = $request["primary_autotransfusionist_id"];
 		$secondary_autotransfusionist_id = $request["secondary_autotransfusionist_id"];
 		$surgeon_id = $request["surgeon_id"];
-		
-		
+				        
 		// Verify Id's
 		$surgeon_id = $this->checkProfessionalId($surgeon_id, 'surgeon');
 		$anesthesiologist_id = $this->checkProfessionalId($anesthesiologist_id, 'anesthesiologist');
@@ -125,12 +124,7 @@ class StaffInformationController extends Controller {
 	 * @return Response
 	 */
 	public function update(StaffInformation $staffInformation, Request $request)
-	{
-		$this->validate($request, 
-		[
-			'surgeon_id' => 'required'
-		]);
-								
+	{      
 		// Get form information				
 		$staffInformation->anesthesiologist_id = $this->checkProfessionalId($request["anesthesiologist_id"], 'anesthesiologist');
         $staffInformation->primary_autotransfusionist_id = $this->checkProfessionalId($request["primary_autotransfusionist_id"], 'autotransfusionist');

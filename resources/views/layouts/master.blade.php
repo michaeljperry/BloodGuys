@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>	
+<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="/css/site.css" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.css" />
@@ -90,11 +91,21 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{!! Html::script('js/moment.js') !!}
+{!! Html::script('js/bootstrap-datetimepicker.min.js') !!}
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.js"></script>
 {!! Html::script('js/dropzone.js') !!}
 
-
+<script>
+    // Set up any existing time fields.
+    $('.timePicker').datetimepicker(
+        {
+            widgetPositioning: { vertical: 'bottom' , horizontal: 'left'},
+            format: 'HH:mm'
+        }
+    );
+</script>
 
 @yield('footer')
 </body>

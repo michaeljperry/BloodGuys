@@ -6,7 +6,7 @@
 		
 		<div class="form-group">
 			{!! Form::label('surgeon_id', 'Surgeon') !!}
-			{!! Form::select('surgeon_id', array_pluck($surgeons, 'professional_name', 'id'), null, ['class'=>'form-control selectize', 'id'=>'surgeon_id']) !!}
+			{!! Form::select('surgeon_id', ['default'=>'None'] + array_pluck($surgeons, 'professional_name', 'id'), $default, ['class'=>'form-control selectize', 'id'=>'surgeon_id']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('anesthesiologist_id', 'Anesthesiologist') !!}

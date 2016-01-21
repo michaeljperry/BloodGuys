@@ -39,7 +39,17 @@ class TransfusionSuppliesController extends Controller {
 	{
 		//
 		$invoice_id = $request['invoice_id'];
-		$parameters = ['default' => 0];	
+		$invoice = Invoice::find($invoice_id);        
+        $transfusionServices = $invoice->transfusionServices;
+        $invoiceTotalCharges = 0.00;
+        
+        if($transfusionServices != null)
+        {
+            $invoiceTotalCharges = $transfusionServices->basic_service_total + $transfusionServices->modified_service_total;
+        }
+        
+        $parameters = array('default' => 0.00, 'invoiceTotalCharges' => $invoiceTotalCharges);
+        
 		return DisplayProcessStep($invoice_id, $parameters);
 	}
 
@@ -142,7 +152,15 @@ class TransfusionSuppliesController extends Controller {
 	public function editInvoice(Invoice $invoice, InvoiceSection $invoiceSection)
 	{
 		$model = $invoice->transfusionSupplies;
-		$parameters = array('default' => NULL);		
+        $transfusionServices = $invoice->transfusionServices;
+        $invoiceTotalCharges = 0.00;
+        
+        if($transfusionServices != null)
+        {
+            $invoiceTotalCharges = $transfusionServices->basic_service_total + $transfusionServices->modified_service_total + $model->supplies_total;
+        }
+        
+        $parameters = array('default' => NULL, 'invoiceTotalCharges' => $invoiceTotalCharges);		
 		return EditInvoiceSection($model, $invoice, $invoiceSection, $parameters);		
 	}
 

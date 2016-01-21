@@ -56,7 +56,7 @@ class ProcessingInformationController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		//
+		//        
 		$invoice_id = $request['invoice_id'];
 				
 		$numRows = $request["numRows"];
@@ -109,8 +109,7 @@ class ProcessingInformationController extends Controller {
 	 * @return Response
 	 */
 	public function update(Request $request)
-	{
-			
+	{			
 		$numRows = $request["numRows"];
 		
 		for($index = 1; $index <= $numRows; $index++)
@@ -128,7 +127,7 @@ class ProcessingInformationController extends Controller {
 	}
 	
 	public function updateProcessingInformation(Invoice $invoice, Request $request)
-	{
+	{        
 		//$record = $invoice->processingInformation()->where('column_id', '=', 1)->first();
 				
 		$numRows = $request["numRows"];

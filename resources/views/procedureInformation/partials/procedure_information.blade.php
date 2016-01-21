@@ -20,16 +20,32 @@
 		</div>
 		<div class="form-group">
 			{!! Form::label('operation_start_time', 'OR Start Time', ['class'=>'control-label']) !!}
-			{!! Form::input('Time', 'operation_start_time', null, ['id'=>'operation_start_time', 'class'=>'form-control', 'required'=>'true']) !!}			
+            
+            <div class="input-group date timePicker">
+                {!! Form::text('operation_start_time', null, ['id'=>'operation_start_time', 'class'=>'form-control', 'required'=>'true']) !!}
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
 		</div>
 		<div class="form-group">
 			{!! Form::label('collection_start_time', 'Collection Start Time', ['class' => 'control-label']) !!}
-			{!! Form::input('Time', 'collection_start_time', null, ['id'=>'collection_start_time', 'class'=>'form-control']) !!}							
+            <div class="input-group date timePicker">
+                {!! Form::text('collection_start_time', null, ['id'=>'collection_start_time', 'class'=>'form-control']) !!}
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>            							
 		</div>
 		
 		<div class="form-group">
 			{!! Form::label('operation_end_time', 'OR End Time', ['class' => 'control-label']) !!}
-			{!! Form::input('Time', 'operation_end_time', null, ['id'=>'operation_end_time', 'class'=>'form-control', 'required'=>'true']) !!}							
+			<div class="input-group date timePicker">
+                {!! Form::text('operation_end_time', null, ['id'=>'operation_end_time', 'class'=>'form-control', 'required'=>'true']) !!}
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>							
 		</div>
 		
 		<div class="form-group">
@@ -39,8 +55,13 @@
 		
 		<div class="form-group">
 			{!! Form::label('wash_time', 'Wash Time', ['class' => 'control-label']) !!}
-			{!! Form::input('Time', 'wash_time', $wash_time, ['id'=>'wash_time', 'class'=>'form-control']) !!}							
-		</div>	
+			<div class="input-group date timePicker">
+                {!! Form::text('wash_time', $wash_time, ['id'=>'wash_time', 'class'=>'form-control']) !!}							
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+        </div>	
 	</div>
 </div>
 

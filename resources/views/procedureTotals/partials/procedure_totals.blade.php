@@ -20,9 +20,24 @@
 					
 					<tr>
 						<td>OR</td>	
-						<td>{!! Form::text('ebl_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('rbc_returned_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('wash_amount_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('ebl_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>
+                        </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('rbc_returned_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>
+                        </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('wash_amount_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>
+                        </td>
 						<td>
 							{!! Form::buttonToggle([['id'=>'VCYes', 'value'=>1, 'text'=>'Yes'],['id'=>'VCNo', 'value'=>0, 'text'=>'No']], 'vc_or', 'VisualCheck_or') !!}						
 						</td>
@@ -33,9 +48,24 @@
 						
 					<tr>
 						<td>Post-Op</td>
-						<td>{!! Form::text('ebl_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('rbc_returned_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('wash_amount_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('ebl_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                               <span class="input-group-addon">mL</span>
+                            </div> 
+                        </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">    
+                                {!! Form::text('rbc_returned_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>
+                        </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('wash_amount_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>
+                        </td>
 						<td>
 							{!! Form::buttonToggle([['id'=>'VCYes', 'value'=>1, 'text'=>'Yes'],['id'=>'VCNo', 'value'=>0, 'text'=>'No']], 'vc_po', 'VisualCheck_po') !!}						
 						</td>
@@ -46,9 +76,24 @@
 					
 					<tr>
 						<td>Post-Op 2</td>
-						<td>{!! Form::text('ebl_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('rbc_returned_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('wash_amount_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('ebl_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>   
+                        </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('rbc_returned_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>
+                        </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('wash_amount_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>
+                        </td>
 						<td>
 							{!! Form::buttonToggle([['id'=>'VCYes', 'value'=>1, 'text'=>'Yes'],['id'=>'VCNo', 'value'=>0, 'text'=>'No']], 'vc_po2', 'VisualCheck_po2') !!}						
 						</td>
@@ -60,9 +105,24 @@
 				<tfoot>
 					<tr>
 						<td>Totals</td>
-						<td>{!! Form::text('ebl_total', $default, ['class'=>'form-control', 'id'=>'ebl_total', 'readonly', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('rbc_returned_total', $default, ['class'=>'form-control', 'id'=>'rbc_returned_total', 'readonly', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('wash_amount_total', $default, ['class'=>'form-control', 'id'=>'wash_amount_total', 'readonly', 'placeholder'=>'"default"', 'required'=>'true']) !!}</td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('ebl_total', $default, ['class'=>'form-control', 'id'=>'ebl_total', 'readonly', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>    
+                            </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">    
+                                {!! Form::text('rbc_returned_total', $default, ['class'=>'form-control', 'id'=>'rbc_returned_total', 'readonly', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>    
+                        </td>
+						<td>
+                            <div class="input-group" style="width: 150px;">
+                                {!! Form::text('wash_amount_total', $default, ['class'=>'form-control', 'id'=>'wash_amount_total', 'readonly', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                <span class="input-group-addon">mL</span>
+                            </div>    
+                        </td>
 					</tr>
 				</tfoot>
 			</table>		

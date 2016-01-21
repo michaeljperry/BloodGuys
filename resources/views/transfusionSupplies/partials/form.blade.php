@@ -142,7 +142,12 @@
 					<tr>
 						<td>Total Supplies Charge</td>
 						<td colspan=4/>
-						<td>{!! Form::text('supplies_total', null, ['class'=>'form-control', 'readonly', 'id'=>'supplies_total']) !!}</td>
+						<td>{!! Form::text('supplies_total', $default, ['class'=>'form-control', 'readonly', 'id'=>'supplies_total']) !!}</td>
+					</tr>
+                    <tr>
+						<td>Total Invoice Charge</td>
+						<td colspan=4/>
+						<td>{!! Form::text('total_invoice_charge', $invoiceTotalCharges, ['class'=>'form-control', 'readonly', 'id'=>'total_invoice_charge']) !!}</td>
 					</tr>						
 				</tbody>
 			</table>		
@@ -275,49 +280,59 @@ document.querySelector("#actions .cancel").onclick = function() {
 
 // Calculate grand total
 $(".charge").blur(function() {
-	var sum = 0;
+	
+    updateTotals();    
+});
+
+function updateTotals()
+{
+    var servicesTotal = getServicesTotal();   
+    
+    // calculate new supplies total
+    var sum = 0;
 	$(".total").each(function() {
 		sum += Number($(this).val());
 	});
 	
-	$("#supplies_total").val(sum);	
-});
+    // set supplies total        
+	$("#supplies_total").val(sum);   
+    
+    setInvoiceTotal(servicesTotal, sum);
+}
+
+function getServicesTotal()
+{
+    // calculate services total
+    var invoiceTotal = Number($("#total_invoice_charge").val());
+    var suppliesTotal = Number($("#supplies_total").val());  
+    var servicesTotal = invoiceTotal - suppliesTotal;
+    return servicesTotal; 
+}
+
+function setInvoiceTotal(servicesTotal, suppliesTotal)
+{
+    // set invoice total
+    var total = servicesTotal + suppliesTotal;
+    $("#total_invoice_charge").val(total);
+}
 
 $(this).keyup(function()
-		{
-			$("#ebl_total").val(sumOfColumns("totals", 2, false));
-			$("#rbc_returned_total").val(sumOfColumns("totals", 3, false));
-			$("#wash_amount_total").val(sumOfColumns("totals", 4, false));	
-			
-			$("#wash_kit_total").val( $("#wash_kit_quantity").val() * $("#wash_kit_charge").val() );
-			$("#reservoir_total").val( $("#reservoir_quantity").val() * $("#reservoir_charge").val() );
-			$("#aspiration_assembly_total").val( $("#aspiration_assembly_quantity").val() * $("#aspiration_assembly_charge").val() );
-			$("#blood_bag_total").val( $("#blood_bag_quantity").val() * $("#blood_bag_charge").val() );
-			$("#vacuum_tubing_total").val( $("#vacuum_tubing_quantity").val() * $("#vacuum_tubing_charge").val() );
-			$("#wound_drain_total").val( $("#wound_drain_quantity").val() * $("#wound_drain_charge").val() );
-			$("#y_connector_total").val( $("#y_connector_quantity").val() * $("#y_connector_charge").val() );
-			$("#blood_filter_total").val( $("#blood_filter_quantity").val() * $("#blood_filter_charge").val() );
-			$("#acda_bag_total").val( $("#acda_bag_quantity").val() * $("#acda_bag_charge").val() );
-			$("#misc_total").val( $("#misc_quantity").val() * $("#misc_charge").val() );
-			
-			$("#basic_service_total").val( $("#basic_service_quantity").val() * $("#basic_service_charge").val() );
-			$("#modified_service_total").val( $("#modified_service_quantity").val() * $("#modified_service_charge").val() );
-			
-		});
+{    			
+    $("#wash_kit_total").val( $("#wash_kit_quantity").val() * $("#wash_kit_charge").val() );
+    $("#reservoir_total").val( $("#reservoir_quantity").val() * $("#reservoir_charge").val() );
+    $("#aspiration_assembly_total").val( $("#aspiration_assembly_quantity").val() * $("#aspiration_assembly_charge").val() );
+    $("#blood_bag_total").val( $("#blood_bag_quantity").val() * $("#blood_bag_charge").val() );
+    $("#vacuum_tubing_total").val( $("#vacuum_tubing_quantity").val() * $("#vacuum_tubing_charge").val() );
+    $("#wound_drain_total").val( $("#wound_drain_quantity").val() * $("#wound_drain_charge").val() );
+    $("#y_connector_total").val( $("#y_connector_quantity").val() * $("#y_connector_charge").val() );
+    $("#blood_filter_total").val( $("#blood_filter_quantity").val() * $("#blood_filter_charge").val() );
+    $("#acda_bag_total").val( $("#acda_bag_quantity").val() * $("#acda_bag_charge").val() );
+    $("#misc_total").val( $("#misc_quantity").val() * $("#misc_charge").val() );
+    
+    updateTotals();						
+});
 
-	function sumOfColumns(tableID, columnIndex, hasHeader) 
-	{
-		var tot = 0;
-		$("#" + tableID + " tbody tr" + (hasHeader ? ":gt(0)" : ""))
-		.children("td:nth-child(" + columnIndex + ")")
-		.each(function() 
-		{
-			var value = parseInt($(this).find("input").val());			
-			tot += (isNaN(value) ? 0 : value);
-  		});
-		
-  		return tot;
-	}
+	
 </script>
 
 

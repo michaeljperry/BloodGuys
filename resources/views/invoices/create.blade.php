@@ -38,7 +38,9 @@
 	
 	$("#addColumnButton").click(function() {
 		//debugger;
-		++cloneCount;			
+		++cloneCount;		
+        
+        console.log('i am here');	
 				
 		var $clone = $("#processingInformationTable tbody tr:last").clone();
 		$clone.children("td:first").text(cloneCount);
@@ -150,7 +152,14 @@
 	
 	// When using the document ready event you can actually put the script in the header section since the code will not be ran until the page is fully loaded.
 	$(document).ready(function()
-	{					
+	{
+        $('.timePicker').datetimepicker(
+            {
+                widgetPositioning: { vertical: 'bottom' , horizontal: 'left'},
+                format: 'HH:mm'
+            }
+        );
+    					
 		$("#operation_start_time").blur(function()
 		{
 			var start = $("#operation_start_time").val();

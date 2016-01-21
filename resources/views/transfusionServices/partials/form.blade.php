@@ -17,15 +17,15 @@
 					
 					<tr>
 						<td>Basic Service</td>	
-						<td>{!! Form::text('basic_service_quantity', $default, ['class'=>'form-control', 'id'=>'basic_service_quantity', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('basic_service_charge', $default, ['class'=>'form-control', 'id'=>'basic_service_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('basic_service_quantity', $default, ['class'=>'form-control calculate', 'id'=>'basic_service_quantity', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('basic_service_charge', $default, ['class'=>'form-control calculate', 'id'=>'basic_service_charge', 'required'=>'true']) !!}</td>
 						<td>{!! Form::text('basic_service_total', $default, ['class'=>'form-control', 'id'=>'basic_service_total', 'readonly', 'required'=>'true']) !!}</td>											 
 					</tr>						
 						
 					<tr>
 						<td>Modified Service - No Blood Processed</td>
-						<td>{!! Form::text('modified_service_quantity', $default, ['class'=>'form-control', 'id'=>'modified_service_quantity', 'required'=>'true']) !!}</td>
-						<td>{!! Form::text('modified_service_charge', $default, ['class'=>'form-control', 'id'=>'modified_service_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('modified_service_quantity', $default, ['class'=>'form-control calculate', 'id'=>'modified_service_quantity', 'required'=>'true']) !!}</td>
+						<td>{!! Form::text('modified_service_charge', $default, ['class'=>'form-control calculate', 'id'=>'modified_service_charge', 'required'=>'true']) !!}</td>
 						<td>{!! Form::text('modified_service_total', $default, ['class'=>'form-control', 'id'=>'modified_service_total', 'readonly', 'required'=>'true']) !!}</td>						
 					</tr>									
 				</tbody>
@@ -34,3 +34,18 @@
 	</div>
 </div>
 
+@section('footer')
+
+<script>
+
+$(".calculate").blur(function()
+{    
+    $("#basic_service_total").val( $("#basic_service_quantity").val() * $("#basic_service_charge").val() );
+    $("#modified_service_total").val( $("#modified_service_quantity").val() * $("#modified_service_charge").val() );   
+    
+});
+    
+
+</script>
+
+@stop
