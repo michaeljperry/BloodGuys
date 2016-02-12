@@ -52,10 +52,7 @@ Route::get('previousProcessStep/{invoice_id}', ['as'=>'previousProcessStep',
     }]);
 Route::get('completedInvoice/{showHeaders?}', ['as'=>'completedInvoice', function($showHeaders=true)
 {
-    //$invoices = Invoice::with('hospital', 'patientInformation', 'procedureInformation', 'procedureTotals')->where('completed', '=', true)->get();
-    //$invoices->join('professions', 'professionals.profession_id', '=', 'professions.id')->select(DB::raw('Concat(professionals.last_name, ", ", Left(professionals.first_name, 1)) as professional_name'), 'professions.name', 'professionals.id')->get();
-    $invoices = DB::select("CALL GetCompletedInvoices();");
-    //dd($invoices); 
+     $invoices = DB::select("CALL GetCompletedInvoices();");
     
     // return the index view for invoices
     return view('invoices.invoiceForExcel', compact('invoices', 'showHeaders'));
@@ -65,3 +62,8 @@ Route::get('completedInvoice/{showHeaders?}', ['as'=>'completedInvoice', functio
 Route::controllers(['auth'=>'Auth\AuthController', 'password'=>'Auth\PasswordController']);
 Route::post('uploadFiles', ['as'=>'uploadFiles', 'uses'=>'InvoiceFilesController@store']);
 Route::get('downloadFile/{invoiceFile}', ['as'=>'downloadFile', 'uses'=>'InvoiceFilesController@downloadFile']);
+
+Route::group(array('prefix'=>'api/v1', 'before'=>'auth.api'), function()
+{
+    Route::resource('billing', 'BillingController'); 
+});

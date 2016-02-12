@@ -10,6 +10,7 @@
 	@if($showHeaders == true)
 	<thead>
 		<tr>
+            <th>Invoice Id</th>
 			<th>Hospital</th>
 			<th>State</th>
 			<th>Procedure Date</th>
@@ -36,6 +37,7 @@
 	<tbody>
 		@foreach($invoices as $invoice)
 			<tr>
+                <td>{{ $invoice->InvoiceId }}</td>
 				<td>{{ $invoice->Hospital }}</td>
 				<td>{{ $invoice->State }}</td>								
 				<td>{{ $invoice->procedure_date }}</td>				

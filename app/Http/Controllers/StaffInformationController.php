@@ -73,7 +73,16 @@ class StaffInformationController extends Controller {
 				
         // Storing staff information
         $invoice_id = $request['invoice_id'];
-        $staffInfo = StaffInformation::create(['anesthesiologist_id'=>$anesthesiologist_id, 'primary_autotransfusionist_id'=>$primary_autotransfusionist_id, 'secondary_autotransfusionist_id'=>$secondary_autotransfusionist_id, 'surgeon_id'=>$surgeon_id, 'invoice_id'=>$invoice_id]);
+        
+        $staffInfo = StaffInformation::firstOrNew(['invoice_id' => $invoice_id]);
+        $staffInfo->anesthesiologist_id = $anesthesiologist_id;
+        $staffInfo->primary_autotransfusionist_id = $primary_autotransfusionist_id;
+        $staffInfo->secondary_autotransfusionist_id = $secondary_autotransfusionist_id;
+        $staffInfo->surgeon_id = $surgeon_id;
+        $staffInfo->invoice_id = $invoice_id;
+        $staffInfo->save();
+        //$staffInfo = StaffInformation::create(['anesthesiologist_id'=>$anesthesiologist_id, 'primary_autotransfusionist_id'=>$primary_autotransfusionist_id, 
+        //'secondary_autotransfusionist_id'=>$secondary_autotransfusionist_id, 'surgeon_id'=>$surgeon_id, 'invoice_id'=>$invoice_id]);
 				
 		// Go to the next step
 		return determineNextStep($_POST['action'], $staffInfo->invoice_id);       

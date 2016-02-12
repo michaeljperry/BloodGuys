@@ -5,6 +5,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 class VerifyCsrfToken extends BaseVerifier {
 
+   
 	/**
 	 * Handle an incoming request.
 	 *
@@ -14,6 +15,19 @@ class VerifyCsrfToken extends BaseVerifier {
 	 */
 	public function handle($request, Closure $next)
 	{
+         //disable CSRF check on following routes
+  		$skip = array(
+					'api/v1/billing',
+                    'api/v1/billing/*'
+					);
+ 
+		foreach ($skip as $key => $route) {
+			//skip csrf check on route
+			if($request->is($route)){
+				return parent::addCookieToResponse($request, $next($request));
+			}
+		}
+        
 		return parent::handle($request, $next);
 	}
 

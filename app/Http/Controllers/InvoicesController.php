@@ -53,7 +53,7 @@ class InvoicesController extends Controller
     public function create(Request $request)
     {         
         // Get all hospitals
-        $hospitals = Hospital::all();
+        $hospitals = Hospital::all()->sortBy('name');
         $date = Carbon::today()->format('Y-m-d');    
         $invoice_id = $request['invoice_id'];
         
@@ -150,7 +150,8 @@ class InvoicesController extends Controller
      * @return Response
      */
     public function update(Invoice $invoice, Request $request)
-    {        
+    { 
+        dd($request);       
         InvoicesController::updateModel($invoice, $request);
         
         return determineNextStep($_POST['action'], $invoice->id);            
