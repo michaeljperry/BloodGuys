@@ -150,8 +150,7 @@ class InvoicesController extends Controller
      * @return Response
      */
     public function update(Invoice $invoice, Request $request)
-    { 
-        dd($request);       
+    {              
         InvoicesController::updateModel($invoice, $request);
         
         return determineNextStep($_POST['action'], $invoice->id);            

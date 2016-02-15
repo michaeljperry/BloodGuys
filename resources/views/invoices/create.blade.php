@@ -6,7 +6,7 @@
 <p>This will take you through the various steps to create an invoice.</p>
 <br/>
 
-{!! Form::open(['route'=>[$current_step->save_url], 'files'=>true]) !!}
+{!! Form::open(['route'=>[$current_step->save_url], 'files'=>true, 'id'=>'form']) !!}
 
 
 <div class="form-group">
@@ -34,6 +34,21 @@
 @section('footer')
 
 <script>	
+
+    $("form").submit(function()
+    {
+        console.log('submit function');
+        
+        $(this).submit(function()
+        {
+            console.log('submit false');
+            return false;
+        });
+        
+        console.log('submit true');
+        return true;
+    });
+
 	var cloneCount=1;
 	
 	$("#addColumnButton").click(function() {
@@ -181,7 +196,15 @@
 			sortField: 'text',
 			selectOnTab: true,
 			closeAfterSelect: true
-		})
+		});
+        
+        $('.selectize-no-create').selectize({
+            create: false,
+            sortField: 'text',
+            selectOnTab: true,
+            closeAfterSelect: true,
+            persist: false
+        });
 	});		
 	
 </script>

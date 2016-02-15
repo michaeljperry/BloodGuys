@@ -13,7 +13,7 @@
 		</div>
 		<div class="form-group">
 			{!! Form::label('hospital_id', 'Hosptial') !!}
-			{!! Form::select('hospital_id', array_pluck($hospitals, 'name', 'id'), null, ['class'=>'form-control', 'id'=>'hospital_id', 'required'=>'true']) !!}
+			{!! Form::select('hospital_id', array_pluck($hospitals, 'name', 'id'), null, ['class'=>'form-control selectize-no-create', 'id'=>'hospital_id', 'required'=>'true']) !!}
 			<!-- select(name, defaults, selected item, additional attributes) -->	
 		</div>							
 		<div class="form-group">
