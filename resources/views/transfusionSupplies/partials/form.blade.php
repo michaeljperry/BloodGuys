@@ -52,8 +52,8 @@
 					
 					<tr>
 						<td>Wash Kit</td>	
-						<td>{!! Form::text('wash_kit_manufacturer', ' ', ['class'=>'form-control', 'id'=>'wash_kit_manufacturer']) !!}</td>
-						<td>{!! Form::text('wash_kit_product_id_number', ' ', ['class'=>'form-control', 'id'=>'wash_kit_product_id_number']) !!}</td>
+						<td>{!! Form::text('wash_kit_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'wash_kit_manufacturer']) !!}</td>
+						<td>{!! Form::text('wash_kit_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'wash_kit_product_id_number']) !!}</td>
 						<td>{!! Form::text('wash_kit_quantity', $default, ['class'=>'form-control', 'id'=>'wash_kit_quantity']) !!}</td>
 						<td>{!! Form::text('wash_kit_charge', $default, ['class'=>'form-control charge', 'id'=>'wash_kit_charge']) !!}</td>
 						<td>{!! Form::text('wash_kit_total', $default, ['class'=>'form-control total', 'id'=>'wash_kit_total', 'readonly']) !!}</td>											 
@@ -61,8 +61,8 @@
 						
 					<tr>
 						<td>Reservoir</td>
-						<td>{!! Form::text('reservoir_manufacturer', ' ', ['class'=>'form-control', 'id'=>'reservoir_manufacturer']) !!}</td>
-						<td>{!! Form::text('reservoir_product_id_number', ' ', ['class'=>'form-control', 'id'=>'reservoir_product_id_number']) !!}</td>
+						<td>{!! Form::text('reservoir_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'reservoir_manufacturer']) !!}</td>
+						<td>{!! Form::text('reservoir_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'reservoir_product_id_number']) !!}</td>
 						<td>{!! Form::text('reservoir_quantity', $default, ['class'=>'form-control', 'id'=>'reservoir_quantity']) !!}</td>
 						<td>{!! Form::text('reservoir_charge', $default, ['class'=>'form-control charge', 'id'=>'reservoir_charge']) !!}</td>
 						<td>{!! Form::text('reservoir_total', $default, ['class'=>'form-control total', 'id'=>'reservoir_total', 'readonly']) !!}</td>						
@@ -70,8 +70,8 @@
 					
 					<tr>
 						<td>Aspiration Assembly</td>	
-						<td>{!! Form::text('aspiration_assembly_manufacturer', ' ', ['class'=>'form-control', 'id'=>'aspiration_assembly_manufacturer']) !!}</td>
-						<td>{!! Form::text('aspiration_assembly_product_id_number', ' ', ['class'=>'form-control', 'id'=>'aspiration_assembly_product_id_number']) !!}</td>
+						<td>{!! Form::text('aspiration_assembly_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'aspiration_assembly_manufacturer']) !!}</td>
+						<td>{!! Form::text('aspiration_assembly_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'aspiration_assembly_product_id_number']) !!}</td>
 						<td>{!! Form::text('aspiration_assembly_quantity', $default, ['class'=>'form-control', 'id'=>'aspiration_assembly_quantity']) !!}</td>
 						<td>{!! Form::text('aspiration_assembly_charge', $default, ['class'=>'form-control charge', 'id'=>'aspiration_assembly_charge']) !!}</td>
 						<td>{!! Form::text('aspiration_assembly_total', $default, ['class'=>'form-control total', 'id'=>'aspiration_assembly_total', 'readonly']) !!}</td>											 
@@ -79,8 +79,8 @@
 						
 					<tr>
 						<td>Blood Bag</td>
-						<td>{!! Form::text('blood_bag_manufacturer', ' ', ['class'=>'form-control', 'id'=>'blood_bag_manufacturer']) !!}</td>
-						<td>{!! Form::text('blood_bag_product_id_number', ' ', ['class'=>'form-control', 'id'=>'blood_bag_product_id_number']) !!}</td>
+						<td>{!! Form::text('blood_bag_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'blood_bag_manufacturer']) !!}</td>
+						<td>{!! Form::text('blood_bag_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'blood_bag_product_id_number']) !!}</td>
 						<td>{!! Form::text('blood_bag_quantity', $default, ['class'=>'form-control', 'id'=>'blood_bag_quantity']) !!}</td>
 						<td>{!! Form::text('blood_bag_charge', $default, ['class'=>'form-control charge', 'id'=>'blood_bag_charge']) !!}</td>
 						<td>{!! Form::text('blood_bag_total', $default, ['class'=>'form-control total', 'id'=>'blood_bag_total', 'readonly']) !!}</td>						
@@ -88,8 +88,8 @@
 					
 					<tr>
 						<td>Vacuum Tubing</td>	
-						<td>{!! Form::text('vacuum_tubing_manufacturer', ' ', ['class'=>'form-control', 'id'=>'vacuum_tubing_manufacturer']) !!}</td>
-						<td>{!! Form::text('vacuum_tubing_product_id_number', ' ', ['class'=>'form-control', 'id'=>'vacuum_tubing_product_id_number']) !!}</td>
+						<td>{!! Form::text('vacuum_tubing_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'vacuum_tubing_manufacturer']) !!}</td>
+						<td>{!! Form::text('vacuum_tubing_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'vacuum_tubing_product_id_number']) !!}</td>
 						<td>{!! Form::text('vacuum_tubing_quantity', $default, ['class'=>'form-control', 'id'=>'vacuum_tubing_quantity']) !!}</td>
 						<td>{!! Form::text('vacuum_tubing_charge', $default, ['class'=>'form-control charge', 'id'=>'vacuum_tubing_charge']) !!}</td>
 						<td>{!! Form::text('vacuum_tubing_total', $default, ['class'=>'form-control total', 'id'=>'vacuum_tubing_total', 'readonly']) !!}</td>											 
@@ -97,8 +97,8 @@
 						
 					<tr>
 						<td>Wound Drain</td>
-						<td>{!! Form::text('wound_drain_manufacturer', ' ', ['class'=>'form-control', 'id'=>'wound_drain_manufacturer']) !!}</td>
-						<td>{!! Form::text('wound_drain_product_id_number', ' ', ['class'=>'form-control', 'id'=>'wound_drain_product_id_number']) !!}</td>
+						<td>{!! Form::text('wound_drain_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'wound_drain_manufacturer']) !!}</td>
+						<td>{!! Form::text('wound_drain_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'wound_drain_product_id_number']) !!}</td>
 						<td>{!! Form::text('wound_drain_quantity', $default, ['class'=>'form-control', 'id'=>'wound_drain_quantity']) !!}</td>
 						<td>{!! Form::text('wound_drain_charge', $default, ['class'=>'form-control charge', 'id'=>'wound_drain_charge']) !!}</td>
 						<td>{!! Form::text('wound_drain_total', $default, ['class'=>'form-control total', 'id'=>'wound_drain_total', 'readonly']) !!}</td>						
@@ -106,8 +106,8 @@
 					
 					<tr>
 						<td>Y Connector</td>	
-						<td>{!! Form::text('y_connector_manufacturer', ' ', ['class'=>'form-control', 'id'=>'y_connector_manufacturer']) !!}</td>
-						<td>{!! Form::text('y_connector_product_id_number', ' ', ['class'=>'form-control', 'id'=>'y_connector_product_id_number']) !!}</td>
+						<td>{!! Form::text('y_connector_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'y_connector_manufacturer']) !!}</td>
+						<td>{!! Form::text('y_connector_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'y_connector_product_id_number']) !!}</td>
 						<td>{!! Form::text('y_connector_quantity', $default, ['class'=>'form-control', 'id'=>'y_connector_quantity']) !!}</td>
 						<td>{!! Form::text('y_connector_charge', $default, ['class'=>'form-control charge', 'id'=>'y_connector_charge']) !!}</td>
 						<td>{!! Form::text('y_connector_total', $default, ['class'=>'form-control total', 'id'=>'y_connector_total', 'readonly']) !!}</td>											 
@@ -115,8 +115,8 @@
 						
 					<tr>
 						<td>Blood Filter</td>
-						<td>{!! Form::text('blood_filter_manufacturer', ' ', ['class'=>'form-control', 'id'=>'blood_filter_manufacturer']) !!}</td>
-						<td>{!! Form::text('blood_filter_product_id_number', ' ', ['class'=>'form-control', 'id'=>'blood_filter_product_id_number']) !!}</td>
+						<td>{!! Form::text('blood_filter_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'blood_filter_manufacturer']) !!}</td>
+						<td>{!! Form::text('blood_filter_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'blood_filter_product_id_number']) !!}</td>
 						<td>{!! Form::text('blood_filter_quantity', $default, ['class'=>'form-control', 'id'=>'blood_filter_quantity']) !!}</td>
 						<td>{!! Form::text('blood_filter_charge', $default, ['class'=>'form-control charge', 'id'=>'blood_filter_charge']) !!}</td>
 						<td>{!! Form::text('blood_filter_total', $default, ['class'=>'form-control total', 'id'=>'blood_filter_total', 'readonly']) !!}</td>						
@@ -124,8 +124,8 @@
 					
 					<tr>
 						<td>ACDA (500 ML Bag)</td>	
-						<td>{!! Form::text('acda_bag_manufacturer', ' ', ['class'=>'form-control', 'id'=>'acda_bag_manufacturer']) !!}</td>
-						<td>{!! Form::text('acda_bag_product_id_number', ' ', ['class'=>'form-control', 'id'=>'acda_bag_product_id_number']) !!}</td>
+						<td>{!! Form::text('acda_bag_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'acda_bag_manufacturer']) !!}</td>
+						<td>{!! Form::text('acda_bag_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'acda_bag_product_id_number']) !!}</td>
 						<td>{!! Form::text('acda_bag_quantity', $default, ['class'=>'form-control', 'id'=>'acda_bag_quantity']) !!}</td>
 						<td>{!! Form::text('acda_bag_charge', $default, ['class'=>'form-control charge', 'id'=>'acda_bag_charge']) !!}</td>
 						<td>{!! Form::text('acda_bag_total', $default, ['class'=>'form-control total', 'id'=>'acda_bag_total', 'readonly']) !!}</td>											 
@@ -133,8 +133,8 @@
 						
 					<tr>
 						<td>Misc</td>
-						<td>{!! Form::text('misc_manufacturer', ' ', ['class'=>'form-control', 'id'=>'misc_manufacturer']) !!}</td>
-						<td>{!! Form::text('misc_product_id_number', ' ', ['class'=>'form-control', 'id'=>'misc_product_id_number']) !!}</td>
+						<td>{!! Form::text('misc_manufacturer', $manufacturerDefault, ['class'=>'form-control', 'id'=>'misc_manufacturer']) !!}</td>
+						<td>{!! Form::text('misc_product_id_number', $productIdDefault, ['class'=>'form-control', 'id'=>'misc_product_id_number']) !!}</td>
 						<td>{!! Form::text('misc_quantity', $default, ['class'=>'form-control', 'id'=>'misc_quantity']) !!}</td>
 						<td>{!! Form::text('misc_charge', $default, ['class'=>'form-control charge', 'id'=>'misc_charge']) !!}</td>
 						<td>{!! Form::text('misc_total', $default, ['class'=>'form-control total', 'id'=>'misc_total', 'readonly']) !!}</td>						

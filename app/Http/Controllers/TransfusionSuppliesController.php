@@ -48,7 +48,7 @@ class TransfusionSuppliesController extends Controller {
             $invoiceTotalCharges = $transfusionServices->basic_service_total + $transfusionServices->modified_service_total;
         }
         
-        $parameters = array('default' => 0.00, 'invoiceTotalCharges' => $invoiceTotalCharges);
+        $parameters = array('default' => 0.00, 'manufacturerDefault' => ' ', 'productIdDefault' => ' ', 'invoiceTotalCharges' => $invoiceTotalCharges);
         
 		return DisplayProcessStep($invoice_id, $parameters);
 	}
@@ -160,7 +160,7 @@ class TransfusionSuppliesController extends Controller {
             $invoiceTotalCharges = $transfusionServices->basic_service_total + $transfusionServices->modified_service_total + $model->supplies_total;
         }
         
-        $parameters = array('default' => NULL, 'invoiceTotalCharges' => $invoiceTotalCharges);		
+        $parameters = array('default' => NULL, 'manufacturerDefault' => NULL, 'productIdDefault' => NULL, 'invoiceTotalCharges' => $invoiceTotalCharges);		
 		return EditInvoiceSection($model, $invoice, $invoiceSection, $parameters);		
 	}
 

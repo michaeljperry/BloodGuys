@@ -9,7 +9,7 @@
 		</div>	
 		<div class="form-group">
 			{!! Form::label('date_taken', 'Date Taken', ['class'=>'control-label']) !!}
-			{!! Form::input('Date', 'date_taken', Carbon::today()->format('Y-m-d'), ['class'=>'form-control', 'id'=>'date_taken']) !!}	
+			{!! Form::input('Date', 'date_taken', $dateTaken, ['class'=>'form-control', 'id'=>'date_taken']) !!}	
 		</div>			
 	</div>
 </div>

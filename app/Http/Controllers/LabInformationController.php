@@ -42,7 +42,7 @@ class LabInformationController extends Controller {
 	{
 		
 		$invoice_id = $request['invoice_id'];
-		$parameters = array('date_taken'=>Carbon::now());
+		$parameters = array('dateTaken'=>Carbon::now()->Format('Y-m-d'));
 		return DisplayProcessStep($invoice_id, $parameters);
 	}
 
@@ -88,7 +88,7 @@ class LabInformationController extends Controller {
 	public function editInvoice(Invoice $invoice, InvoiceSection $invoiceSection)
 	{
 		$model = $invoice->labInformation;		        
-        return EditInvoiceSection($model, $invoice, $invoiceSection, null);
+        return EditInvoiceSection($model, $invoice, $invoiceSection, array('dateTaken'=>NULL));
 	}
 	/**
 	 * Update the specified resource in storage.
