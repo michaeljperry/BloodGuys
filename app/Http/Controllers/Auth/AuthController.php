@@ -21,7 +21,7 @@ class AuthController extends Controller {
 	use AuthenticatesAndRegistersUsers;
 
 	// Page to redirect too once validated
-    protected $redirectTo = '';
+    protected $redirectTo = "/";
 	
 	/**
 	 * Create a new authentication controller instance.
@@ -38,4 +38,14 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}	
 
+    // Override registration so that no one can register as a new user
+    public function getRegister()
+    {
+        return redirect('/');
+    }
+    
+    public function postRegister()
+    {
+        return redirect('/');
+    }
 }
