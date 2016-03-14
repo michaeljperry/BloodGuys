@@ -146,6 +146,16 @@ class ProcessingInformationController extends Controller {
 			}					
 		}		
 		
+        
+        $maxRecords = $invoice->processingInformation()->max('column_id');
+        
+        if($maxRecords > $numRows)
+        {           
+            // delete removed processing records
+            $invoice->processingInformation()->where('column_id', '>', $numRows)->delete();
+                       
+        }        
+        
 		return determineNextStep($_POST['action'], $invoice->id);	
 	}
 

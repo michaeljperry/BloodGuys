@@ -6,7 +6,7 @@
 <p>This will take you through the various steps to create an invoice.</p>
 <br/>
 
-{!! Form::open(['route'=>[$current_step->save_url], 'files'=>true, 'id'=>'form']) !!}
+{!! Form::open(['route'=>[$current_step->save_url], 'files'=>true, 'id'=>'createForm']) !!}
 
 
 <div class="form-group">
@@ -34,17 +34,23 @@
 @section('footer')
 
 <script>	
-
-    $("form").submit(function()
+    var hasBeenSubmitted = false;
+    console.log('submitted:'+hasBeenSubmitted);
+        
+    $("#form").submit(function()
     {
-        console.log('submit function');
-        
-        $(this).submit(function()
+        if(hasBeenSubmitted == true)
         {
-            console.log('submit false');
+            console.log("already submitted.");
             return false;
-        });
+        }
         
+        console.log('submit function');
+        hasBeenSubmitted = true;
+        
+        // can't use value because it's used to determine what to do in the controller
+        // disabling seems to make it not send the button information
+                
         console.log('submit true');
         return true;
     });

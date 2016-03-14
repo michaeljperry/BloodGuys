@@ -15,6 +15,7 @@ use App\Models\Professional;
 use Carbon;
 use Webpatser\Uuid\Uuid;
 use Auth;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class InvoicesController extends Controller
 {
@@ -29,16 +30,17 @@ class InvoicesController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
+                
         if(Auth::user()->admin)
         {
-            $invoices = Invoice::with('hospital', 'staffinformation')->get();            
+            $invoices = Invoice::with('hospital', 'staffinformation')->paginate(10);            
         }        
         else
-        {
-            $invoices = Auth::user()->invoices;    
-            $invoices->load('hospital', 'staffinformation');
+        {            
+            $invoices = Auth::user()->invoices()->with('hospital', 'staffInformation')->paginate(1);   
+            
         }        
                                             
         // return the index view for invoices

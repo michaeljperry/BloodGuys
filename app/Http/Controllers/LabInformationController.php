@@ -52,11 +52,16 @@ class LabInformationController extends Controller {
 	 * @return Response
 	 */
 	public function store(Request $request)
-	{
+	{        
 		$invoice_id = $request['invoice_id'];
 		$date_taken = $request['date_taken'];
 		$pre_op_hematocrit = $request['pre_op_hematocrit'];
 		
+        if($pre_op_hematocrit == "" || $pre_op_hematocrit === null)
+        {
+            $pre_op_hematocrit = 0.00;
+        }
+        
 		$labInfo = LabInformation::create(['pre_op_hematocrit'=>$pre_op_hematocrit, 'date_taken'=>$date_taken, 'invoice_id'=>$invoice_id]);
 				
 		// Setup next view		        
@@ -100,6 +105,12 @@ class LabInformationController extends Controller {
 	{				
 		$labInfo->date_taken = $request['date_taken'];
 		$labInfo->pre_op_hematocrit = $request['pre_op_hematocrit'];
+        
+        if($labInfo->pre_op_hematocrit == "" || $labInfo->pre_op_hematocrit === null)
+        {
+            $labInfo->pre_op_hematocrit = 0.00;
+        }
+        
 		$labInfo->save();
 		
 		return determineNextStep($_POST['action'], $labInfo->invoice_id);      

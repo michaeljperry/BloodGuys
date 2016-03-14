@@ -135,7 +135,7 @@ class ProcedureTotalsController extends Controller {
 	public function editInvoice(Invoice $invoice, InvoiceSection $invoiceSection)
 	{
 		$model = $invoice->procedureTotals;	
-		$parameters = array('default' => null);							
+		$parameters = array('default' => null);        		
 		return EditInvoiceSection($model, $invoice, $invoiceSection, $parameters);	
 	}
 	

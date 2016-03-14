@@ -95,7 +95,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.js"></script>
 {!! Html::script('js/dropzone.js') !!}
-
+{!! Html::script('js/site.js') !!}
 <script>
     // Set up any existing time fields.
     $('.timePicker').datetimepicker(

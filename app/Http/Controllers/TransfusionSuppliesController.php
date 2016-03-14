@@ -40,13 +40,8 @@ class TransfusionSuppliesController extends Controller {
 		//
 		$invoice_id = $request['invoice_id'];
 		$invoice = Invoice::find($invoice_id);        
-        $transfusionServices = $invoice->transfusionServices;
-        $invoiceTotalCharges = 0.00;
-        
-        if($transfusionServices != null)
-        {
-            $invoiceTotalCharges = $transfusionServices->basic_service_total + $transfusionServices->modified_service_total;
-        }
+       
+        $invoiceTotalCharges = $this->calculateServicesTotal($invoice);
         
         $parameters = array('default' => 0.00, 'manufacturerDefault' => ' ', 'productIdDefault' => ' ', 'invoiceTotalCharges' => $invoiceTotalCharges);
         
@@ -152,13 +147,8 @@ class TransfusionSuppliesController extends Controller {
 	public function editInvoice(Invoice $invoice, InvoiceSection $invoiceSection)
 	{
 		$model = $invoice->transfusionSupplies;
-        $transfusionServices = $invoice->transfusionServices;
-        $invoiceTotalCharges = 0.00;
         
-        if($transfusionServices != null)
-        {
-            $invoiceTotalCharges = $transfusionServices->basic_service_total + $transfusionServices->modified_service_total + $model->supplies_total;
-        }
+        $invoiceTotalCharges = $this->calculateServicesTotal($invoice);
         
         $parameters = array('default' => NULL, 'manufacturerDefault' => NULL, 'productIdDefault' => NULL, 'invoiceTotalCharges' => $invoiceTotalCharges);		
 		return EditInvoiceSection($model, $invoice, $invoiceSection, $parameters);		
@@ -238,7 +228,7 @@ class TransfusionSuppliesController extends Controller {
 		);
 		
 		$transfusionSupplies->save();
-		
+
 		return determineNextStep($_POST['action'], $transfusionSupplies->invoice_id);
 	}
 
@@ -252,5 +242,23 @@ class TransfusionSuppliesController extends Controller {
 	{
 		//
 	}
+    
+    private function calculateServicesTotal(Invoice $invoice)
+    {
+        $invoiceTotalCharges = 0.00;
+        
+        if($invoice != null)
+        {
+            $transfusionServices = $invoice->transfusionServices;
+        
+        
+            if($transfusionServices != null)
+            {
+                $invoiceTotalCharges = $transfusionServices->basic_service_total + $transfusionServices->modified_service_total + $transfusionServices->additional_operator_hours_total + $transfusionServices->platelate_gel_service_total;            
+            }    
+        }        
+        
+        return $invoiceTotalCharges;
+    }
 
 }

@@ -4,7 +4,7 @@
 
 <h1>Edit Invoice - {{$invoice_section->title}}</h1>
 
-{!! Form::model($model, ['method'=>'PATCH', 'route'=>[$invoice_section->update_url, $model]]) !!}
+{!! Form::model($model, ['method'=>'PATCH', 'route'=>[$invoice_section->update_url, $model], 'id'=>'editForm']) !!}
 
 	@include($invoice_section->form_path)
 	

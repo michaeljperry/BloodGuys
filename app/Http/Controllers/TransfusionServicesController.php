@@ -60,6 +60,14 @@ class TransfusionServicesController extends Controller {
 		$modified_service_charge = $request['modified_service_charge'];
 		$modified_service_total = $request['modified_service_total'];
 		
+        $additional_operator_hours = $request['additional_operator_hours'];
+		$additional_operator_hours_charge = $request['additional_operator_hours_charge'];
+		$additional_operator_hours_total = $request['additional_operator_hours_total'];
+        
+        $platelate_gel_service_quantity = $request['platelate_gel_service_quantity'];
+		$platelate_gel_service_charge = $request['platelate_gel_service_charge'];
+		$platelate_gel_service_total = $request['platelate_gel_service_total'];
+        
 		$transfusion_service = TransfusionServices::create(
 			[
 				'basic_service_quantity' => $basic_service_quantity,
@@ -68,6 +76,12 @@ class TransfusionServicesController extends Controller {
 				'modified_service_quantity' => $modified_service_quantity,
 				'modified_service_charge' => $modified_service_charge,
 				'modified_service_total' => $modified_service_total,
+                'additional_operator_hours' => $additional_operator_hours,
+                'additional_operator_hours_charge' => $additional_operator_hours_charge,
+                'additional_operator_hours_total' => $additional_operator_hours_total,
+                'platelate_gel_service_quantity' => $platelate_gel_service_quantity,
+				'platelate_gel_service_charge' => $platelate_gel_service_charge,
+				'platelate_gel_service_total' => $platelate_gel_service_total,                
 				'invoice_id' => $invoice_id
 			]
 		);
@@ -112,7 +126,7 @@ class TransfusionServicesController extends Controller {
 	 * @return Response
 	 */
 	public function update(TransfusionServices $transfusionServices, Request $request)
-	{
+	{        
 		$transfusionServices->basic_service_quantity = $request['basic_service_quantity'];
 		$transfusionServices->basic_service_charge = $request['basic_service_charge'];
 		$transfusionServices->basic_service_total = $request['basic_service_total'];
@@ -121,6 +135,14 @@ class TransfusionServicesController extends Controller {
 		$transfusionServices->modified_service_charge = $request['modified_service_charge'];
 		$transfusionServices->modified_service_total = $request['modified_service_total'];
 		
+        $transfusionServices->additional_operator_hours = $request['additional_operator_hours'];
+		$transfusionServices->additional_operator_hours_charge = $request['additional_operator_hours_charge'];
+		$transfusionServices->additional_operator_hours_total = $request['additional_operator_hours_total'];
+        
+        $transfusionServices->platelate_gel_service_quantity = $request['platelate_gel_service_quantity'];
+		$transfusionServices->platelate_gel_service_charge = $request['platelate_gel_service_charge'];
+		$transfusionServices->platelate_gel_service_total = $request['platelate_gel_service_total'];
+        
 		$transfusionServices->save();
 		
 		return determineNextStep($_POST['action'], $transfusionServices->invoice_id);

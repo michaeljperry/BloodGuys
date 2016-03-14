@@ -5,6 +5,7 @@
 	<div class="panel-body">	
 		<div class="form-group">
 			<button id="addColumnButton" type="button">+</button>
+            <button id="removeColumnButton" type="button" style="display: none">-</button>
 		</div>
 		<div class="table-responsive" style="height: 350px;">			
 			<table id="processingInformationTable" class="table table-striped table-hover table-responsive">
@@ -16,7 +17,8 @@
 						<th>Irrigation Volume</th>
 						<th>EBL</th>
 						<th>RBCs Salvaged</th>
-						<th>Time</th>														
+						<th>Time</th>	
+                        <th>Remove</th>													
 					</tr>
 				</thead>
 				<tbody>
@@ -28,33 +30,33 @@
 							
                             <td>                                
                                 <div class="input-group" >   
-                                    {!! Form::text(null, $record->amount_processed, ['class'=>'form-control', 'id'=>'amt_processed_'.$record->column_id, 'name'=>'amt_processed_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->amount_processed, ['class'=>'form-control numeric', 'id'=>'amt_processed_'.$record->column_id, 'name'=>'amt_processed_'.$record->column_id, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>                                                                         
                             </td>
                              																 
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::text(null, $record->anticoagulent_volume, ['class'=>'form-control', 'id'=>'anticoag_vol_'.$record->column_id, 'name'=>'anticoag_vol_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->anticoagulent_volume, ['class'=>'form-control numeric', 'id'=>'anticoag_vol_'.$record->column_id, 'name'=>'anticoag_vol_'.$record->column_id, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::text(null, $record->irrigation_volume, ['class'=>'form-control', 'id'=>'irr_vol_'.$record->column_id, 'name'=>'irr_vol_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->irrigation_volume, ['class'=>'form-control numeric', 'id'=>'irr_vol_'.$record->column_id, 'name'=>'irr_vol_'.$record->column_id, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::text(null, $record->ebl, ['class'=>'form-control', 'id'=>'ebl_'.$record->column_id, 'name'=>'ebl_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->ebl, ['class'=>'form-control numeric', 'id'=>'ebl_'.$record->column_id, 'name'=>'ebl_'.$record->column_id, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
                                 
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::text(null, $record->rbcs_salvaged, ['class'=>'form-control', 'id'=>'rbc_'.$record->column_id, 'name'=>'rbc_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->rbcs_salvaged, ['class'=>'form-control numeric', 'id'=>'rbc_'.$record->column_id, 'name'=>'rbc_'.$record->column_id, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
@@ -76,31 +78,31 @@
 							<td>{{$numRows}}</td>
 							<td>
                                 <div class="input-group">
-                                    {!! Form::text('amt_processed_1', 0, ['class'=>'form-control', 'id'=>'amt_processed_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', 'amt_processed_1', 0, ['class'=>'form-control numeric', 'id'=>'amt_processed_'.$numRows, 'required'=>'true', 'step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>																 
 							<td>
                                 <div class="input-group">
-                                    {!! Form::text(null, $anticoag_vol, ['class'=>'form-control', 'id'=>'anticoag_vol_'.$numRows, 'name'=>'anticoag_vol_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $anticoag_vol, ['class'=>'form-control numeric', 'id'=>'anticoag_vol_'.$numRows, 'name'=>'anticoag_vol_'.$numRows, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group">
-                                    {!! Form::text('irr_vol_1', 0, ['class'=>'form-control', 'id'=>'irr_vol_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', 'irr_vol_1', 0, ['class'=>'form-control numeric', 'id'=>'irr_vol_'.$numRows, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group">
-                                    {!! Form::text('ebl_1', 0, ['class'=>'form-control', 'id'=>'ebl_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', 'ebl_1', 0, ['class'=>'form-control numeric', 'id'=>'ebl_'.$numRows, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group">
-                                    {!! Form::text('rbc_1', 0, ['class'=>'form-control', 'id'=>'rbc_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', 'rbc_1', 0, ['class'=>'form-control numeric', 'id'=>'rbc_'.$numRows, 'required'=>'true']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
@@ -129,42 +131,72 @@
 @section('footer')
 
 <script>
-                
-    var cloneCount=$("#numRows").val();
-	
-	$("#addColumnButton").click(function() {
-		//debugger;
-		++cloneCount;			
-		console.log('page script');		
-		var $clone = $("#processingInformationTable tbody tr:last").clone();
-		$clone.children("td:first").text(cloneCount);
-        //console.log($clone);
-		$clone.children("td").children("div").children("input").each(function(index)
-			{
-                console.log('changing names');
-				var id = $(this).prop('id').substr(0, $(this).prop('id').lastIndexOf("_") + 1) + cloneCount;
-                console.log('id: %c', id);			
-				var name = $(this).prop('name').substr(0, $(this).prop('name').lastIndexOf("_") + 1) + cloneCount;
-                console.log('name: %c', name);
-				$(this).prop('id', id);
-				$(this).prop('name', name);
-			});
-			
-		$("#processingInformationTable tbody").append($clone);
-
-        // add time picker for this instance
-        $('#time_' + cloneCount).datetimepicker(
-            {
-               widgetPositioning: { vertical: 'bottom' , horizontal: 'left'},
-                format: 'HH:mm' 
-            }
+    
+    $(document).ready(function()
+        {       
+    
+        var cloneCount=$("#numRows").val(); 
         
-        );
-        						
-		$("#numRows").val(cloneCount);	
-	});
+        if(cloneCount > 1)
+        {
+            if($("#removeColumnButton").is(":hidden") && cloneCount > 1 )
+            {
+                $("#removeColumnButton").show();
+            }
+        }
+        
+        $('#removeColumnButton').click(function()
+            {
+                cloneCount--;
+                $("#numRows").val(cloneCount);
+                $("#processingInformationTable tbody tr:last").remove();  
+                
+                if(cloneCount == 1)
+                {
+                    $(this).hide();
+                }         
+            });   
+        
+        $("#addColumnButton").click(function() {
+            //debugger;
+            ++cloneCount;			
+            //console.log('page script');		
+            var $clone = $("#processingInformationTable tbody tr:last").clone();
+            $clone.children("td:first").text(cloneCount);
+            //console.log($clone);
+            $clone.children("td").children("div").children("input").each(function(index)
+                {
+                    //console.log('changing names');
+                    var id = $(this).prop('id').substr(0, $(this).prop('id').lastIndexOf("_") + 1) + cloneCount;
+                    //console.log('id: %c', id);			
+                    var name = $(this).prop('name').substr(0, $(this).prop('name').lastIndexOf("_") + 1) + cloneCount;
+                    var cssClass = "form-control numeric";
+                    //console.log('name: %c', name);
+                    $(this).prop('id', id);
+                    $(this).prop('name', name);
+                    $(this).addClass(cssClass);
+                });
+                        
+            $("#processingInformationTable tbody").append($clone);
+
+            // add time picker for this instance
+            $('#time_' + cloneCount).datetimepicker(
+                {
+                widgetPositioning: { vertical: 'bottom' , horizontal: 'left'},
+                    format: 'HH:mm' 
+                }
+            
+            );
+                                    
+            $("#numRows").val(cloneCount);
+            
+            if($("#removeColumnButton").is(":hidden") && cloneCount > 1 )
+            {
+                $("#removeColumnButton").show();
+            }	
+        });
     
-    
+    });
 </script>
 
 @stop

@@ -97,6 +97,7 @@ function EditInvoiceSection($model, $invoice, $invoice_section, $parameters=arra
 			
 	$parameters['previous_step_url'] = $previous_step_url;	
 	$parameters['invoice'] = $invoice;
+    
 	return view('invoices.editTemplate', $parameters);
 }
 

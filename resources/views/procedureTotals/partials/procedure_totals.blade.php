@@ -22,19 +22,19 @@
 						<td>OR</td>	
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('ebl_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number', 'ebl_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('rbc_returned_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','rbc_returned_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('wash_amount_or', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number', 'wash_amount_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
@@ -50,19 +50,19 @@
 						<td>Post-Op</td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('ebl_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','ebl_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                <span class="input-group-addon">mL</span>
                             </div> 
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">    
-                                {!! Form::text('rbc_returned_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','rbc_returned_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('wash_amount_po', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','wash_amount_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
@@ -78,19 +78,19 @@
 						<td>Post-Op 2</td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('ebl_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'ebl_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','ebl_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>   
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('rbc_returned_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'rbc_returned_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','rbc_returned_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::text('wash_amount_po2', $default, ['class'=>'form-control calculateTotal', 'id'=>'wash_amount_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','wash_amount_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
@@ -131,7 +131,7 @@
 </div>
 @section('footer')
 <script>
-	$(".calculateTotal").blur(function()
+	$(".numeric calculateTotal").blur(function()
 		{
 			$("#ebl_total").val(sumOfColumns("totals", 2, false));
 			$("#rbc_returned_total").val(sumOfColumns("totals", 3, false));
