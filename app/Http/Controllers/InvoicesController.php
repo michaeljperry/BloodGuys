@@ -16,6 +16,7 @@ use Carbon;
 use Webpatser\Uuid\Uuid;
 use Auth;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Log;
 
 class InvoicesController extends Controller
 {
@@ -35,11 +36,11 @@ class InvoicesController extends Controller
                 
         if(Auth::user()->admin)
         {
-            $invoices = Invoice::with('hospital', 'staffinformation')->paginate(10);            
+            $invoices = Invoice::with('hospital', 'staffinformation')->orderBy('id')->paginate(15);            
         }        
         else
         {            
-            $invoices = Auth::user()->invoices()->with('hospital', 'staffInformation')->paginate(1);   
+            $invoices = Auth::user()->invoices()->with('hospital', 'staffInformation')->orderBy('id')->paginate(15);   
             
         }        
                                             
@@ -78,7 +79,7 @@ class InvoicesController extends Controller
         $special_notes = $request['special_notes'];
         
         // Get information about the user that created the invoice
-        $created_by = Auth::user()->name;
+        $created_by = Auth::user()->fullName();
         $last_modified_by = $created_by;
         $completed = false;
         
@@ -168,7 +169,7 @@ class InvoicesController extends Controller
         $special_notes = $request['special_notes'];
         
         // Get information about the user that created the invoice
-        $last_modified_by = Auth::user()->name;
+        $last_modified_by = Auth::user()->fullName();
         
         $invoice->procedure_date = $procedure_date;
         $invoice->hospital_id = $hospital_id;
@@ -186,10 +187,14 @@ class InvoicesController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
+        $id = $invoice->id;
+        
         // Delete the invoice        
         $invoice->delete();
         
         Session::flash('flash_message', $invoice->id .' was successfully deleted.');
+        
+        Log::info('Invoice deleted.', ['invoice_id'=>$id, 'user'=>Auth::user()->name]);
         
         return redirect('invoices');
     }

@@ -48,21 +48,25 @@ class UsersController extends Controller {
 	public function store(Request $request)
 	{
 		$this->validate($request, [
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:users',
+			'first_name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+			'email' => 'required|email|max:50|unique:users',
 			'password' => 'required|confirmed|min:6'			
 		]);
 		
 		$admin = ($request['admin'] == "1")?true:false;
+        $active = ($request['active'] == "1")?true:false;
 			
 		User::create([
-			'name' => $request['name'],
+			'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
 			'email' => $request['email'],
 			'password' => bcrypt($request['password']),
-			'admin' => $admin 
+			'admin' => $admin,
+            'active' => $active
 		]);
 		
-		return redirect('users')->with('flash_message', 'A user account for '.$request['name'].' was created successfully.');
+		return redirect('users')->with('flash_message', 'A user account for '.$request['first_name'].' was created successfully.');
 	}
 
 	/**

@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'admin'];
+	protected $fillable = ['first_name', 'last_name', 'email', 'password', 'admin', 'active'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -35,4 +35,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->belongsToMany('App\Models\Invoice')->withPivot('invoice_id');
 	}
+    
+    public function fullName()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
 }

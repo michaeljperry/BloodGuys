@@ -133,8 +133,16 @@ class ProcedureTotalsController extends Controller {
 	}
 
 	public function editInvoice(Invoice $invoice, InvoiceSection $invoiceSection)
-	{
-		$model = $invoice->procedureTotals;	
+	{                   
+		$model = $invoice->procedureTotals;
+        
+         // model is null so we need to create this section
+        /*if($model === null) 
+        {
+            return redirect()->route('procedureTotals.create', ['invoice_id'=>$invoice->id]);
+        }*/
+            
+                    
 		$parameters = array('default' => null);        		
 		return EditInvoiceSection($model, $invoice, $invoiceSection, $parameters);	
 	}

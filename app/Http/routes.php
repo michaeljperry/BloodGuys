@@ -50,20 +50,14 @@ Route::get('previousProcessStep/{invoice_id}', ['as'=>'previousProcessStep',
         $current_process_step = Session::get('current_process_step');
         return SetupProcessStep($invoice_id, $current_process_step - 1);
     }]);
-Route::get('completedInvoice/{showHeaders?}', ['as'=>'completedInvoice', function($showHeaders=true)
-{
-     $invoices = DB::select("CALL GetCompletedInvoices();");
-    
-    // return the index view for invoices
-    return view('invoices.invoiceForExcel', compact('invoices', 'showHeaders'));
-}]);
 
 // For authentication
 Route::controllers(['auth'=>'Auth\AuthController', 'password'=>'Auth\PasswordController']);
 Route::post('uploadFiles', ['as'=>'uploadFiles', 'uses'=>'InvoiceFilesController@store']);
 Route::get('downloadFile/{invoiceFile}', ['as'=>'downloadFile', 'uses'=>'InvoiceFilesController@downloadFile']);
 
-Route::group(array('prefix'=>'api/v1', 'before'=>'auth.api'), function()
+Route::group(array('prefix'=>'api/v1', 'middleware'=>'auth.api'), function()
 {
-    Route::resource('billing', 'BillingController'); 
+    Route::get('billing/completedInvoices/{showHeaders?}', ['as'=>'completedInvoices', 'uses'=>'BillingController@index']);
+    Route::patch('billing/billInvoices', ['uses'=>'BillingController@update']);
 });

@@ -131,7 +131,7 @@
 </div>
 @section('footer')
 <script>
-	$(".numeric calculateTotal").blur(function()
+	$(".calculateTotal").blur(function()
 		{
 			$("#ebl_total").val(sumOfColumns("totals", 2, false));
 			$("#rbc_returned_total").val(sumOfColumns("totals", 3, false));

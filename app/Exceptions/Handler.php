@@ -2,6 +2,8 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Session;
 
 class Handler extends ExceptionHandler {
 
@@ -36,6 +38,12 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
+        if($e instanceof TokenMismatchException)
+        {
+            Session::flash('flash_message', 'Your session has expired. Please login again.');
+            return redirect('auth/login');  
+        }
+        
 		if ($this->isHttpException($e))
 		{
 			return $this->renderHttpException($e);

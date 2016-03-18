@@ -9,6 +9,7 @@ use App\Models\Professional;
 use App\Models\StaffInformation;
 use App\Models\Invoice;
 use App\Models\InvoiceSection;
+use App\User;
 use Webpatser\Uuid\Uuid;
 use Session;
 use DB;
@@ -43,9 +44,11 @@ class StaffInformationController extends Controller {
 		//Get parameters needed for this form		
 		$professionals = Professional::join('professions', 'professionals.profession_id', '=', 'professions.id')->select(DB::raw('Concat(professionals.last_name, ", ", Left(professionals.first_name, 1)) as professional_name'), 'professions.name', 'professionals.id')->get();  
 		$surgeons = $professionals->where('name', 'Surgeon');
-		
+		$autotransfusionists = User::select(DB::raw('Concat(users.last_name, ", ", Left(users.first_name, 1)) as user_name'), 'users.id')->get(); 
         $anesthesiologists = $professionals->where('name', 'Anesthesiologist');
-        $autotransfusionists = $professionals->where('name', 'Autotransfusionist');
+        
+        //dd($autotransfusionists);
+        //$autotransfusionists = $professionals->where('name', 'Autotransfusionist');
 		$default = 'default';
 		$parameters = array('surgeons'=>$surgeons, 'anesthesiologists' => $anesthesiologists, 'autotransfusionists' => $autotransfusionists, 'default'=>$default);
 			
@@ -68,7 +71,7 @@ class StaffInformationController extends Controller {
 		// Verify Id's
 		$surgeon_id = $this->checkProfessionalId($surgeon_id, 'surgeon');
 		$anesthesiologist_id = $this->checkProfessionalId($anesthesiologist_id, 'anesthesiologist');
-		$primary_autotransfusionist_id  = $this->checkProfessionalId($primary_autotransfusionist_id, 'autotransfusionist');
+		//$primary_autotransfusionist_id  = $this->checkProfessionalId($primary_autotransfusionist_id, 'autotransfusionist');
 		$secondary_autotransfusionist_id  = $this->checkProfessionalId($secondary_autotransfusionist_id, 'autotransfusionist');
 				
         // Storing staff information
