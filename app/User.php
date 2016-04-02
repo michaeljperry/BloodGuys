@@ -40,4 +40,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->first_name.' '.$this->last_name;
     }
+    
+    // Provides last name, first name
+    public function reverseFullName()
+    {
+        return $this->last_name.', '.$this->first_name;
+    }
 }

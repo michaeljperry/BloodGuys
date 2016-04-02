@@ -22,19 +22,19 @@
 						<td>OR</td>	
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number', 'ebl_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number', 'ebl_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_or', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number','rbc_returned_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','rbc_returned_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_or', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number', 'wash_amount_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_or', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number', 'wash_amount_or', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_or', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
@@ -50,19 +50,19 @@
 						<td>Post-Op</td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number','ebl_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','ebl_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_po', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                <span class="input-group-addon">mL</span>
                             </div> 
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">    
-                                {!! Form::input('number','rbc_returned_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','rbc_returned_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_po', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number','wash_amount_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_po', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','wash_amount_po', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_po', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
@@ -78,19 +78,19 @@
 						<td>Post-Op 2</td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number','ebl_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','ebl_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'ebl_po2', 'placeholder'=>'"default"', 'required'=>'true', 'step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>   
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number','rbc_returned_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','rbc_returned_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'rbc_returned_po2', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
 						<td>
                             <div class="input-group" style="width: 150px;">
-                                {!! Form::input('number','wash_amount_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_po2', 'placeholder'=>'"default"', 'required'=>'true']) !!}
+                                {!! Form::input('number','wash_amount_po2', $default, ['class'=>'form-control numeric calculateTotal', 'id'=>'wash_amount_po2', 'placeholder'=>'"default"', 'required'=>'true','step'=>'0.01']) !!}
                                 <span class="input-group-addon">mL</span>
                             </div>
                         </td>
@@ -145,8 +145,8 @@
 		.children("td:nth-child(" + columnIndex + ")")
 		.each(function() 
 		{
-			var value = parseInt($(this).find("input").val());			
-			tot += (isNaN(value) ? 0: value);
+			var value = parseFloat($(this).find("input").val());			
+			tot += (isNaN(value) ? 0.00: value);
   		});
 		
   		return tot;

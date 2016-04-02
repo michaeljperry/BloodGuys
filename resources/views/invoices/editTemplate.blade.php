@@ -63,7 +63,7 @@
 		.children("td:nth-child(" + columnIndex + ")")
 		.each(function() 
 		{
-			var value = parseInt($(this).find("input").val());			
+			var value = parseFloat($(this).find("input").val());			
 			tot += (isNaN(value) ? 0 : value);
   		});
 		

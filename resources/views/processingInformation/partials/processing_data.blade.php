@@ -17,8 +17,7 @@
 						<th>Irrigation Volume</th>
 						<th>EBL</th>
 						<th>RBCs Salvaged</th>
-						<th>Time</th>	
-                        <th>Remove</th>													
+						<th>Time</th>                        												
 					</tr>
 				</thead>
 				<tbody>
@@ -30,33 +29,33 @@
 							
                             <td>                                
                                 <div class="input-group" >   
-                                    {!! Form::input('number', null, $record->amount_processed, ['class'=>'form-control numeric', 'id'=>'amt_processed_'.$record->column_id, 'name'=>'amt_processed_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->amount_processed, ['class'=>'form-control numeric', 'id'=>'amt_processed_'.$record->column_id, 'name'=>'amt_processed_'.$record->column_id, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>                                                                         
                             </td>
                              																 
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::input('number', null, $record->anticoagulent_volume, ['class'=>'form-control numeric', 'id'=>'anticoag_vol_'.$record->column_id, 'name'=>'anticoag_vol_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->anticoagulent_volume, ['class'=>'form-control numeric', 'id'=>'anticoag_vol_'.$record->column_id, 'name'=>'anticoag_vol_'.$record->column_id, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::input('number', null, $record->irrigation_volume, ['class'=>'form-control numeric', 'id'=>'irr_vol_'.$record->column_id, 'name'=>'irr_vol_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->irrigation_volume, ['class'=>'form-control numeric', 'id'=>'irr_vol_'.$record->column_id, 'name'=>'irr_vol_'.$record->column_id, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::input('number', null, $record->ebl, ['class'=>'form-control numeric', 'id'=>'ebl_'.$record->column_id, 'name'=>'ebl_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->ebl, ['class'=>'form-control numeric', 'id'=>'ebl_'.$record->column_id, 'name'=>'ebl_'.$record->column_id, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
                                 
 							<td>
                                 <div class="input-group" >
-                                    {!! Form::input('number', null, $record->rbcs_salvaged, ['class'=>'form-control numeric', 'id'=>'rbc_'.$record->column_id, 'name'=>'rbc_'.$record->column_id, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $record->rbcs_salvaged, ['class'=>'form-control numeric', 'id'=>'rbc_'.$record->column_id, 'name'=>'rbc_'.$record->column_id, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
@@ -84,25 +83,25 @@
                             </td>																 
 							<td>
                                 <div class="input-group">
-                                    {!! Form::input('number', null, $anticoag_vol, ['class'=>'form-control numeric', 'id'=>'anticoag_vol_'.$numRows, 'name'=>'anticoag_vol_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', null, $anticoag_vol, ['class'=>'form-control numeric', 'id'=>'anticoag_vol_'.$numRows, 'name'=>'anticoag_vol_'.$numRows, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group">
-                                    {!! Form::input('number', 'irr_vol_1', 0, ['class'=>'form-control numeric', 'id'=>'irr_vol_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', 'irr_vol_1', 0, ['class'=>'form-control numeric', 'id'=>'irr_vol_'.$numRows, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group">
-                                    {!! Form::input('number', 'ebl_1', 0, ['class'=>'form-control numeric', 'id'=>'ebl_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', 'ebl_1', 0, ['class'=>'form-control numeric', 'id'=>'ebl_'.$numRows, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>
 							<td>
                                 <div class="input-group">
-                                    {!! Form::input('number', 'rbc_1', 0, ['class'=>'form-control numeric', 'id'=>'rbc_'.$numRows, 'required'=>'true']) !!}
+                                    {!! Form::input('number', 'rbc_1', 0, ['class'=>'form-control numeric', 'id'=>'rbc_'.$numRows, 'required'=>'true','step'=>'0.01']) !!}
                                     <span class="input-group-addon">mL</span>
                                 </div>
                             </td>

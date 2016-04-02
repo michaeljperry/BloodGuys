@@ -17,27 +17,27 @@
 					
 					<tr>
 						<td>Basic Service</td>	
-						<td>{!! Form::input('number', 'basic_service_quantity', $default, ['class'=>'form-control calculate numeric', 'id'=>'basic_service_quantity', 'required'=>'true']) !!}</td>
-						<td>{!! Form::input('number', 'basic_service_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'basic_service_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::input('number', 'basic_service_quantity', $default, ['class'=>'form-control calculate numeric', 'id'=>'basic_service_quantity', 'required'=>'true', 'step'=>'0.01']) !!}</td>
+						<td>{!! Form::input('number', 'basic_service_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'basic_service_charge', 'required'=>'true', 'step'=>'0.01']) !!}</td>
 						<td>{!! Form::text('basic_service_total', $default, ['class'=>'form-control', 'id'=>'basic_service_total', 'readonly', 'required'=>'true']) !!}</td>											 
 					</tr>						
 						
 					<tr>
 						<td>Modified Service - No Blood Processed</td>
-						<td>{!! Form::input('number', 'modified_service_quantity', $default, ['class'=>'form-control calculate numeric', 'id'=>'modified_service_quantity', 'required'=>'true']) !!}</td>
-						<td>{!! Form::input('number', 'modified_service_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'modified_service_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::input('number', 'modified_service_quantity', $default, ['class'=>'form-control calculate numeric', 'id'=>'modified_service_quantity', 'required'=>'true', 'step'=>'0.01']) !!}</td>
+						<td>{!! Form::input('number', 'modified_service_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'modified_service_charge', 'required'=>'true', 'step'=>'0.01']) !!}</td>
 						<td>{!! Form::text('modified_service_total', $default, ['class'=>'form-control', 'id'=>'modified_service_total', 'readonly', 'required'=>'true']) !!}</td>						
 					</tr>
                     <tr>
 						<td>Additional Operator Hours</td>
-						<td>{!! Form::input('number', 'additional_operator_hours', $default, ['class'=>'form-control calculate numeric', 'id'=>'additional_operator_hours', 'required'=>'true']) !!}</td>
-						<td>{!! Form::input('number', 'additional_operator_hours_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'additional_operator_hours_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::input('number', 'additional_operator_hours', $default, ['class'=>'form-control calculate numeric', 'id'=>'additional_operator_hours', 'required'=>'true', 'step'=>'0.01']) !!}</td>
+						<td>{!! Form::input('number', 'additional_operator_hours_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'additional_operator_hours_charge', 'required'=>'true', 'step'=>'0.01']) !!}</td>
 						<td>{!! Form::text('additional_operator_hours_total', $default, ['class'=>'form-control', 'id'=>'additional_operator_hours_total', 'readonly', 'required'=>'true']) !!}</td>						
 					</tr>
                     <tr>
 						<td>Platelate Gel Service</td>
-						<td>{!! Form::input('number', 'platelate_gel_service_quantity', $default, ['class'=>'form-control calculate numeric', 'id'=>'platelate_gel_service_quantity', 'required'=>'true']) !!}</td>
-						<td>{!! Form::input('number', 'platelate_gel_service_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'platelate_gel_service_charge', 'required'=>'true']) !!}</td>
+						<td>{!! Form::input('number', 'platelate_gel_service_quantity', $default, ['class'=>'form-control calculate numeric', 'id'=>'platelate_gel_service_quantity', 'required'=>'true', 'step'=>'0.01']) !!}</td>
+						<td>{!! Form::input('number', 'platelate_gel_service_charge', $default, ['class'=>'form-control calculate numeric', 'id'=>'platelate_gel_service_charge', 'required'=>'true', 'step'=>'0.01']) !!}</td>
 						<td>{!! Form::text('platelate_gel_service_total', $default, ['class'=>'form-control', 'id'=>'platelate_gel_service_total', 'readonly', 'required'=>'true']) !!}</td>						
 					</tr>									
 				</tbody>

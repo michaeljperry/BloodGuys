@@ -14,11 +14,32 @@
 		</div>
 		<div class="form-group">
 			{!! Form::label('primary_autotransfusionist_id', 'Auto Transfusionist') !!}
-			{!! Form::select('primary_autotransfusionist_id', array_pluck($autotransfusionists, 'user_name', 'id'), null, ['class'=>'form-control selectize', 'id'=>'primary_autotransfusionist_id', 'required'=>'true']) !!}	
+			
+            @if($primary_autoTransfusionist_editable === true)
+        	
+            {!! Form::select('primary_autotransfusionist_id', ['default'=>'None'] + array_pluck($autotransfusionists, 'user_name', 'id'), $primary_autoTransfusionist, ['class'=>'form-control selectize-no-create', 'id'=>'secondary_autotransfusionist_id']) !!}
+            
+            @else
+            
+            {!! Form::text('primary_autotransfusionist_id', $primary_autoTransfusionist, ['class'=>'form-control', 'id'=>'primary_autotransfusionist_id', 'required'=>'true', 'readonly']) !!}
+            
+            @endif
+                        	
 		</div>	
+        
 		<div class="form-group">
 			{!! Form::label('secondary_autotransfusionist_id', 'Auto Transfusionist 2') !!}
-			{!! Form::select('secondary_autotransfusionist_id', ['default'=>'None'] + array_pluck($autotransfusionists, 'user_name', 'id'), $default, ['class'=>'form-control selectize', 'id'=>'secondary_autotransfusionist_id']) !!}	
+		    
+            @if($secondary_autoTransfusionist_editable === true)
+        	
+            {!! Form::select('secondary_autotransfusionist_id', ['default'=>'None'] + array_pluck($autotransfusionists, 'user_name', 'id'), $secondary_autoTransfusionist, ['class'=>'form-control selectize-no-create', 'id'=>'secondary_autotransfusionist_id']) !!}
+            
+            @else 
+            
+            {!! Form::text('secondary_autotransfusionist_id', $secondary_autoTransfusionist, ['class'=>'form-control', 'id'=>'secondary_autotransfusionist_id', 'required'=>'true', 'readonly']) !!}
+            
+            @endif
 		</div>		
+        
 	</div>
 </div>
