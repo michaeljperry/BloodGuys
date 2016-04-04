@@ -9,7 +9,8 @@
 		<tr>
 			<th>Name</th>
 			<th>Email</th>
-			<th>Is Admin</th>			
+			<th>Is Admin</th>	
+            <th>Active</th>		
 			<th>Edit</th>
 			<!--<th>Delete</th>-->
 		</tr>
@@ -17,10 +18,17 @@
 	<tbody>
 		@foreach($users as $user)
 			<tr>
-				<td>{{$user->name}}</td>
+				<td>{{$user->first_name}} {{$user->last_name}}</td>
 				<td>{{$user->email}}</td>
 				<td>
 					@if($user->admin)
+						<input type="checkbox" checked disabled>
+					@else
+						<input type="checkbox" disabled>
+					@endif
+				</td>
+                <td>
+					@if($user->active)
 						<input type="checkbox" checked disabled>
 					@else
 						<input type="checkbox" disabled>

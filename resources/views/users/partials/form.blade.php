@@ -1,7 +1,13 @@
 <div class="form-group">
-	<label class="col-md-4 control-label">Employee Name</label>
+	<label class="col-md-4 control-label">Employee First Name</label>
 	<div class="col-md-6">
-		{!! Form::text('name', null, ['class'=>'form-control']) !!}		
+		{!! Form::text('first_name', null, ['class'=>'form-control']) !!}		
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-4 control-label">Employee Last Name</label>
+	<div class="col-md-6">
+		{!! Form::text('last_name', null, ['class'=>'form-control']) !!}		
 	</div>
 </div>
 
@@ -33,6 +39,12 @@
 	<div class = "col-md-6">
 		{!! Form::checkbox('admin', 1, null, ['class'=>'form-control']) !!}
 		<!--<input type="checkbox" class="form-control" name="admin" value="1">-->
+	</div>
+</div>	
+<div class = "form-group">
+	<label class = "col-md-4 control-label">Active</label>
+	<div class = "col-md-6">
+		{!! Form::checkbox('active', 1, null, ['class'=>'form-control']) !!}		
 	</div>
 </div>	
 <div class="form-group">

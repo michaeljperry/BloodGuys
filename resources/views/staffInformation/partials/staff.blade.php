@@ -17,7 +17,7 @@
 			
             @if($primary_autoTransfusionist_editable === true)
         	
-            {!! Form::select('primary_autotransfusionist_id', ['default'=>'None'] + array_pluck($autotransfusionists, 'user_name', 'id'), $primary_autoTransfusionist, ['class'=>'form-control selectize-no-create', 'id'=>'secondary_autotransfusionist_id']) !!}
+            {!! Form::select('primary_autotransfusionist_id', ['default'=>'None'] + array_pluck($autotransfusionists, 'user_name', 'id'), $primary_autoTransfusionist, ['class'=>'form-control selectize-no-create', 'id'=>'secondary_autotransfusionist_id', 'required' => 'true']) !!}
             
             @else
             

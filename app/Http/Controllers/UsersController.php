@@ -100,16 +100,20 @@ class UsersController extends Controller {
 	public function update(User $user, Request $request)
 	{
 		$this->validate($request, [
-			'name' => 'required|max:255',
+			'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
 			'email' => 'required|email|max:255'						
 		]);
 		
-		$admin = ($request['admin'] == "1")?true:false;
-			
-		$user->name = $request['name'];
+		$admin = ($request['admin'] == "1")?true:false;		
+        $active = ($request['active'] == "1")?true:false;
+        
+		$user->first_name = $request['first_name'];
+        $user->last_name = $request['last_name'];
 		$user->email = $request['email'];		
 		$user->admin = $admin;
-		
+		$user->active = $active;
+        
 		$user->save();
 		
 		return redirect('users')->with('flash_message', 'The user account for '.$request['name'].' was updated successfully.');

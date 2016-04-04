@@ -173,6 +173,14 @@ class StaffInformationController extends Controller {
             $secondary_autoTransfusionist_editable = false;
             $secondary_autoTransfusionist = User::find($staffInformation->secondary_autotransfusionist_id)->reverseFullName();
         }       
+        else if($user->admin)
+        {
+            $primary_autoTransfusionist = $staffInformation->primary_autotransfusionist_id;
+            $primary_autoTransfusionist_editable = true;
+            
+            $secondary_autoTransfusionist = $staffInformation->secondary_autotransfusionist_id;
+            $secondary_autoTransfusionist_editable = true;            
+        }
              
 		// setup the parameters		
 		$professionals = Professional::join('professions', 'professionals.profession_id', '=', 'professions.id')->select(DB::raw('Case When first_name is null or first_name = "" then last_name else Concat(last_name, ", ", Left(first_name, 1)) end as professional_name'), 'professions.name', 'professionals.id')->get();  
