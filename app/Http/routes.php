@@ -55,7 +55,7 @@ Route::get('previousProcessStep/{invoice_id}', ['as'=>'previousProcessStep',
 Route::controllers(['auth'=>'Auth\AuthController', 'password'=>'Auth\PasswordController']);
 Route::post('uploadFiles', ['as'=>'uploadFiles', 'uses'=>'InvoiceFilesController@store']);
 Route::get('downloadFile/{invoiceFile}', ['as'=>'downloadFile', 'uses'=>'InvoiceFilesController@downloadFile']);
-
+Route::patch('invoices/{invoices}/complete', ['as'=>'completeInvoice', 'uses'=>'InvoicesController@completeInvoice']);
 Route::group(array('prefix'=>'api/v1', 'middleware'=>'auth.api'), function()
 {
     Route::get('billing/completedInvoices/{showHeaders?}', ['as'=>'completedInvoices', 'uses'=>'BillingController@index']);

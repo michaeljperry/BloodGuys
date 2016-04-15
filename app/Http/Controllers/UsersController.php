@@ -116,7 +116,7 @@ class UsersController extends Controller {
         
 		$user->save();
 		
-		return redirect('users')->with('flash_message', 'The user account for '.$request['name'].' was updated successfully.');
+		return redirect('users')->with('flash_message', 'The user account for '.$request['first_name'].' was updated successfully.');
 	}
 
 	/**

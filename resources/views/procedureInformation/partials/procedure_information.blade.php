@@ -22,7 +22,7 @@
 			{!! Form::label('operation_start_time', 'OR Start Time', ['class'=>'control-label']) !!}
             
             <div class="input-group date timePicker">
-                {!! Form::text('operation_start_time', null, ['id'=>'operation_start_time', 'class'=>'form-control', 'required'=>'true']) !!}
+                {!! Form::text('operation_start_time', null, ['id'=>'operation_start_time', 'class'=>'form-control']) !!}
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
@@ -41,7 +41,7 @@
 		<div class="form-group">
 			{!! Form::label('operation_end_time', 'OR End Time', ['class' => 'control-label']) !!}
 			<div class="input-group date timePicker">
-                {!! Form::text('operation_end_time', null, ['id'=>'operation_end_time', 'class'=>'form-control', 'required'=>'true']) !!}
+                {!! Form::text('operation_end_time', null, ['id'=>'operation_end_time', 'class'=>'form-control']) !!}
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
@@ -50,7 +50,7 @@
 		
 		<div class="form-group">
 			{!! Form::label('total_time', 'Total Time', ['class' => 'control-label']) !!}
-			{!! Form::text('total_time', null, ['id'=>'total_time', 'class'=>'form-control', 'readonly'=>'true', 'required'=>'true']) !!}							
+			{!! Form::text('total_time', null, ['id'=>'total_time', 'class'=>'form-control', 'readonly'=>'true']) !!}							
 		</div>
 		
 		<div class="form-group">

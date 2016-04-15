@@ -62,21 +62,7 @@ class ProcedureInformationController extends Controller {
 		$operation_end_time = $request['operation_end_time'];
 		$wash_time = $request['wash_time'];
 		$total_time = $request['total_time'];
-				
-		/*$start_time = Carbon::parse($operation_start_time);
-		$end_time = Carbon::parse($operation_end_time);
-			
-		if($end_time->hour < $start_time->hour)
-		{
-			$end_time->addDay();
-		}
 		
-		$hours = $start_time->diffInHours($end_time);
-		$minutes = $start_time->diffInMinutes($end_time) - $hours * 60;
-		$total_time = Carbon::createFromTime($hours, $minutes, 0, 'America/Los_Angeles');
-				
-		dd($total_time);
-		*/
 		$procedureInfo = ProcedureInformation::create(['physician_order'=>$physician_order, 'method_group'=>$method_group, 'procedure'=>$procedure, 'operation_start_time'=>$operation_start_time, 'collection_start_time'=>$collection_start_time, 'operation_end_time'=>$operation_end_time, 'total_time'=>$total_time, 'wash_time'=>$wash_time, 'invoice_id'=>$invoice_id]);
 				
 		// Setup next view		        
@@ -120,16 +106,17 @@ class ProcedureInformationController extends Controller {
 	 */
 	public function update(ProcedureInformation $procedureInfo, Request $request)
 	{
-		//
-		
+		//Left off on setting times to null for procedure information.  It seems to be working. Do a few more tests.
+        //Set wash time to null as well and do not pass a default value.	
+        // Need to add complete invoice button to invoices page. Remove complete invoice check from helpers.	
 		$procedureInfo->physician_order = $request['physician_order'];
 		$procedureInfo->method_group = $request['method_group'];
 		$procedureInfo->procedure = $request['procedure'];
-		$procedureInfo->operation_start_time = $request['operation_start_time'];
-		$procedureInfo->collection_start_time = $request['collection_start_time'];
-		$procedureInfo->operation_end_time = $request['operation_end_time'];
-		$procedureInfo->total_time = $request['total_time'];
-		$procedureInfo->wash_time = $request['wash_time'];
+		$procedureInfo->operation_start_time = $this->validateValue($request['operation_start_time']);
+		$procedureInfo->collection_start_time = $this->validateValue($request['collection_start_time']);
+		$procedureInfo->operation_end_time = $this->validateValue($request['operation_end_time']);
+		$procedureInfo->total_time = $this->validateValue($request['total_time']);
+		$procedureInfo->wash_time = $this->validateValue($request['wash_time']);
 		$procedureInfo->save();
 		
 		return determineNextStep($_POST['action'], $procedureInfo->invoice_id);    
@@ -145,5 +132,11 @@ class ProcedureInformationController extends Controller {
 	{
 		//
 	}
+    
+    private function validateValue($value)
+    {
+        if(empty($value)) return null;
+        return $value;
+    }
 
 }

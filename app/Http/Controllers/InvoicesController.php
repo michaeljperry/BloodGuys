@@ -203,4 +203,40 @@ class InvoicesController extends Controller
     {        
         return SetupProcessStep($invoice_id, $process_step);
     }
+    
+    public function CompleteInvoice(Invoice $invoice, Request $request)
+    {                
+        try
+        {
+            // Mark the invoice as incomplete and return.
+            if($invoice->completed == true)
+            {
+                $invoice->completed = false;
+                $invoice->save();
+                Session::flash('flash_message', $invoice->id.' was successfully marked as incomplete.');
+                return redirect()->back();        
+            }
+                                     
+            // Make sure all sections have been completed before marking the invoice as complete.
+            foreach($invoice->invoiceSections as $invoiceSection )
+            {
+                if($invoiceSection->pivot->completed == false)
+                {                    
+                    throw new \Exception("Invoice section ".$invoiceSection->display_name." has not been completed.");
+                }
+            } 
+            
+            // Mark the invoice as complete.
+            $invoice->completed = true;
+            $invoice->save();
+        }
+        catch(\Exception $e)
+        {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+        
+        Session::flash('flash_message', $invoice->id.' was successfully marked as completed.');
+        return redirect()->back();
+       
+    }
 }

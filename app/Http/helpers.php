@@ -22,6 +22,15 @@ function delete_glyph_icon($routeParams, $glyphIcon = 'glyphicon-trash')
 	return $form .= Form::close();
 }
 
+function form_link($routeParams, $method, $glyphIcon)
+{	
+	$form = Form::open(['method' => $method, 'route' => $routeParams]);
+	
+	$form .= '<button type="submit" class = "btn btn-primary"><span class="glyphicon '.$glyphIcon.'" aria-hidden="true"/></button>';
+			
+	return $form .= Form::close();
+}
+
 /**
 * Creates a button toggle element with div.
 *
@@ -188,9 +197,9 @@ function NextProcessStep($invoice_id)
 	if($current_process_step == $last_step)
 	{
 		// Complete invoice (should be moved to complete invoice section)
-		$invoice = Invoice::find($invoice_id);		
+		/*$invoice = Invoice::find($invoice_id);		
 		$invoice->completed = true;
-		$invoice->save();
+		$invoice->save();*/
 		
 		// Set Flash Message that invoice with id was successfully saved.
 		
