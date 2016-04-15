@@ -15,8 +15,8 @@ return [
 	*/
 
 	'mailgun' => [
-		'domain' => '',
-		'secret' => '',
+		'domain' => 'mg.bloodguys.com',
+		'secret' => 'key-d0af971656cccfa5d057ea72c37b32ea',
 	],
 
 	'mandrill' => [
