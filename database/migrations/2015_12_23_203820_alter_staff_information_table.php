@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterStaffInformationTable extends Migration {
+class MakeSurgeonIdNullable extends Migration {
 
 	/**
 	 * Run the migrations.
